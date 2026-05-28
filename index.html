@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --cream: #F4F1EC;
     --dark: #1A1915;
@@ -21,432 +20,204 @@
     --serif: 'Playfair Display', Georgia, serif;
     --sans: 'DM Sans', sans-serif;
   }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--dark); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
-  body {
-    background: var(--cream);
-    color: var(--dark);
-    font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
+  /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     padding: 1.2rem 4vw;
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(244,241,236,0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(244,241,236,0.93);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
   }
-  .nav-name {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    letter-spacing: 0.02em;
-    color: var(--dark);
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex; gap: 2rem; list-style: none;
-  }
-  .nav-links a {
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .nav-name { font-family: var(--serif); font-size: 1.1rem; color: var(--dark); text-decoration: none; cursor: pointer; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; cursor: pointer; }
   .nav-links a:hover { color: var(--dark); }
+  .nav-back { display: none; align-items: center; gap: 0.5rem; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: color 0.2s; background: none; border: none; font-family: var(--sans); }
+  .nav-back:hover { color: var(--dark); }
+  .nav-back svg { width: 14px; height: 14px; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 8rem 4vw 4rem;
-    gap: 4rem;
-  }
+  /* ── PAGES ── */
+  #page-home { display: block; }
+  #page-project { display: none; }
+
+  /* ── HERO ── */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 8rem 4vw 4rem; gap: 4rem; }
   .hero-text { max-width: 540px; }
-  .hero-eyebrow {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.8rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block; width: 40px; height: 1px;
-    background: var(--accent);
-  }
-  .hero-name {
-    font-family: var(--serif);
-    font-size: clamp(3rem, 5vw, 5rem);
-    line-height: 1.05;
-    color: var(--dark);
-    margin-bottom: 1.5rem;
-  }
+  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--accent); }
+  .hero-name { font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); line-height: 1.05; color: var(--dark); margin-bottom: 1.5rem; }
   .hero-name em { font-style: italic; color: var(--accent); }
-  .hero-bio {
-    font-size: 1rem;
-    color: var(--mid);
-    line-height: 1.8;
-    max-width: 440px;
-    margin-bottom: 2.5rem;
-  }
-  .hero-cta {
-    display: inline-flex; align-items: center; gap: 0.8rem;
-    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--dark);
-    text-decoration: none;
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 2px;
-    transition: color 0.2s, border-color 0.2s;
-  }
+  .hero-bio { font-size: 1rem; color: var(--mid); line-height: 1.8; max-width: 440px; margin-bottom: 2.5rem; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.2s; }
   .hero-cta:hover { color: var(--accent); }
   .hero-cta svg { width: 14px; height: 14px; }
+  .hero-image { position: relative; align-self: stretch; display: flex; align-items: center; }
+  .hero-img-wrap { position: relative; width: 100%; max-width: 460px; margin-left: auto; }
+  .hero-img-wrap::before { content: ''; position: absolute; top: -20px; right: -20px; width: 70%; height: 70%; border: 1px solid var(--accent-light); z-index: 0; }
+  .hero-img-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover; position: relative; z-index: 1; filter: grayscale(10%); }
+  .hero-stats { position: absolute; bottom: -1rem; left: -2rem; background: var(--dark); color: var(--cream); padding: 1.2rem 1.6rem; z-index: 2; min-width: 140px; }
+  .hero-stats .stat-num { font-family: var(--serif); font-size: 2rem; line-height: 1; color: var(--accent-light); }
+  .hero-stats .stat-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,241,236,0.6); margin-top: 4px; }
 
-  .hero-image {
-    position: relative;
-    align-self: stretch;
-    display: flex; align-items: center;
-  }
-  .hero-img-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 460px;
-    margin-left: auto;
-  }
-  .hero-img-wrap::before {
-    content: '';
-    position: absolute;
-    top: -20px; right: -20px;
-    width: 70%; height: 70%;
-    border: 1px solid var(--accent-light);
-    z-index: 0;
-  }
-  .hero-img-wrap img {
-    width: 100%; aspect-ratio: 4/5;
-    object-fit: cover;
-    position: relative; z-index: 1;
-    filter: grayscale(15%);
-  }
-  .hero-stats {
-    position: absolute;
-    bottom: -1rem; left: -2rem;
-    background: var(--dark);
-    color: var(--cream);
-    padding: 1.2rem 1.6rem;
-    z-index: 2;
-    min-width: 140px;
-  }
-  .hero-stats .stat-num {
-    font-family: var(--serif);
-    font-size: 2rem;
-    line-height: 1;
-    color: var(--accent-light);
-  }
-  .hero-stats .stat-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(244,241,236,0.6);
-    margin-top: 4px;
-  }
-
-  /* SECTION COMMONS */
+  /* ── SECTIONS COMMONS ── */
   section { padding: 6rem 4vw; }
-  .section-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    display: flex; align-items: center; gap: 0.8rem;
-    margin-bottom: 3rem;
-  }
-  .section-label::before {
-    content: ''; display: block;
-    width: 30px; height: 1px; background: var(--accent);
-  }
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    line-height: 1.15;
-    color: var(--dark);
-    margin-bottom: 1rem;
-    max-width: 600px;
-  }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 3rem; }
+  .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--accent); }
+  .section-title { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.15; color: var(--dark); margin-bottom: 1rem; max-width: 600px; }
 
-  /* ABOUT */
+  /* ── ABOUT ── */
   .about { background: var(--dark); color: var(--cream); }
   .about .section-label { color: var(--accent-light); }
   .about .section-label::before { background: var(--accent-light); }
   .about .section-title { color: var(--cream); max-width: none; }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 6rem;
-    align-items: start;
-    margin-top: 1rem;
-  }
-  .about-text p {
-    color: rgba(244,241,236,0.75);
-    font-size: 1.05rem;
-    line-height: 1.9;
-    margin-bottom: 1.2rem;
-  }
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 6rem; align-items: start; margin-top: 1rem; }
+  .about-text p { color: rgba(244,241,236,0.75); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1.2rem; }
   .about-details { display: flex; flex-direction: column; gap: 2rem; }
-  .detail-item {
-    border-top: 1px solid rgba(244,241,236,0.12);
-    padding-top: 1rem;
-  }
-  .detail-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    margin-bottom: 0.4rem;
-  }
-  .detail-value {
-    font-size: 0.95rem;
-    color: rgba(244,241,236,0.85);
-  }
+  .detail-item { border-top: 1px solid rgba(244,241,236,0.12); padding-top: 1rem; }
+  .detail-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.4rem; }
+  .detail-value { font-size: 0.95rem; color: rgba(244,241,236,0.85); }
 
-  /* FILMS */
-  .films-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 4rem;
-    flex-wrap: wrap; gap: 1rem;
-  }
+  /* ── FILMS LIST ── */
+  .films-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 1rem; }
   .films-grid { display: flex; flex-direction: column; gap: 0; }
-
   .film-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid var(--border);
-    overflow: hidden;
-    cursor: default;
-    transition: background 0.3s;
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border); overflow: hidden;
+    cursor: pointer; transition: background 0.3s;
+    position: relative;
   }
   .film-item:last-child { border-bottom: 1px solid var(--border); }
   .film-item:hover { background: rgba(196,119,58,0.04); }
-
-  .film-info {
-    padding: 2.5rem 3rem 2.5rem 0;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .film-meta {
-    display: flex; align-items: center; gap: 1rem;
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.8rem;
-  }
+  .film-item:hover .film-arrow { opacity: 1; transform: translateX(0); }
+  .film-arrow { position: absolute; bottom: 2rem; right: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); opacity: 0; transform: translateX(-8px); transition: opacity 0.25s, transform 0.25s; }
+  .film-arrow svg { width: 14px; height: 14px; }
+  .film-info { padding: 2.5rem 3rem 2.5rem 0; display: flex; flex-direction: column; justify-content: center; }
+  .film-meta { display: flex; align-items: center; gap: 1rem; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
   .film-meta .year { color: var(--accent); font-weight: 500; }
-  .film-meta .type {
-    padding: 2px 10px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-  }
-  .film-award {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent);
-    background: rgba(196,119,58,0.08);
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 0.8rem;
-    width: fit-content;
-  }
-  .film-title {
-    font-family: var(--serif);
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    color: var(--dark);
-    margin-bottom: 0.8rem;
-    line-height: 1.2;
-  }
-  .film-role {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.8rem;
-    font-weight: 500;
-  }
-  .film-synopsis {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 380px;
-  }
-  .film-tag {
-    display: inline-block;
-    margin-top: 1rem;
-    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted);
-    padding: 4px 12px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-  }
+  .film-meta .type { padding: 2px 10px; border: 1px solid var(--border); border-radius: 20px; }
+  .film-award { display: inline-flex; align-items: center; gap: 6px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: rgba(196,119,58,0.08); padding: 3px 10px; border-radius: 20px; margin-bottom: 0.8rem; width: fit-content; }
+  .film-title { font-family: var(--serif); font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--dark); margin-bottom: 0.8rem; line-height: 1.2; }
+  .film-synopsis { font-size: 0.9rem; color: var(--muted); line-height: 1.7; max-width: 380px; }
+  .film-tag { display: inline-block; margin-top: 1rem; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 4px 12px; border: 1px solid var(--border); border-radius: 20px; }
   .film-tag.post { color: var(--accent); border-color: rgba(196,119,58,0.3); background: rgba(196,119,58,0.04); }
-
-  .film-images {
-    padding: 1.5rem 0 1.5rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    align-items: center;
-  }
-  .film-images img {
-    width: 100%; aspect-ratio: 16/10;
-    object-fit: cover;
-    filter: grayscale(10%);
-    transition: filter 0.3s;
-  }
+  .film-images { padding: 1.5rem 0 1.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center; }
+  .film-images img { width: 100%; aspect-ratio: 16/10; object-fit: cover; filter: grayscale(10%); transition: filter 0.3s; }
   .film-images img:first-child:only-child { grid-column: 1/-1; aspect-ratio: 16/9; }
   .film-item:hover .film-images img { filter: grayscale(0%); }
-  .film-images img.tall { grid-row: 1/-1; aspect-ratio: 3/4; }
 
-  /* AUTRES PROJETS */
+  /* ── AUTRES PROJETS ── */
   .other-projects { background: #1A1915; }
   .other-projects .section-label { color: var(--accent-light); }
   .other-projects .section-label::before { background: var(--accent-light); }
   .other-projects .section-title { color: var(--cream); }
-  .other-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5px;
-    margin-top: 0.5rem;
-    background: rgba(244,241,236,0.06);
-  }
-  .other-card {
-    background: var(--dark);
-    padding: 2rem 1.8rem;
-    position: relative; overflow: hidden;
-    transition: background 0.3s;
-  }
+  .other-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5px; margin-top: 3rem; background: rgba(244,241,236,0.06); }
+  .other-card { background: var(--dark); padding: 2rem 1.8rem; position: relative; overflow: hidden; cursor: pointer; transition: background 0.3s; }
   .other-card:hover { background: #252520; }
-  .other-card-year {
-    font-family: var(--serif);
-    font-size: 3.5rem;
-    color: rgba(244,241,236,0.06);
-    position: absolute;
-    top: -0.5rem; right: 0.5rem;
-    line-height: 1;
-    pointer-events: none;
-  }
-  .other-card-role {
-    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent-light);
-    margin-bottom: 0.7rem;
-  }
-  .other-card-title {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    color: var(--cream);
-    margin-bottom: 0.6rem;
-    line-height: 1.25;
-  }
-  .other-card-synopsis {
-    font-size: 0.83rem;
-    color: rgba(244,241,236,0.55);
-    line-height: 1.65;
-  }
-  .other-card-img {
-    width: 100%; aspect-ratio: 16/9; object-fit: cover;
-    margin-top: 1.2rem;
-    filter: grayscale(20%) brightness(0.85);
-    transition: filter 0.3s;
-  }
+  .other-card.no-link { cursor: default; }
+  .other-card-year { font-family: var(--serif); font-size: 3.5rem; color: rgba(244,241,236,0.06); position: absolute; top: -0.5rem; right: 0.5rem; line-height: 1; pointer-events: none; }
+  .other-card-role { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.7rem; }
+  .other-card-title { font-family: var(--serif); font-size: 1.25rem; color: var(--cream); margin-bottom: 0.6rem; line-height: 1.25; }
+  .other-card-synopsis { font-size: 0.83rem; color: rgba(244,241,236,0.55); line-height: 1.65; }
+  .other-card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-top: 1.2rem; filter: grayscale(20%) brightness(0.85); transition: filter 0.3s; }
   .other-card:hover .other-card-img { filter: grayscale(0%) brightness(0.95); }
+  .other-card-watch { display: inline-flex; align-items: center; gap: 6px; margin-top: 1rem; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-light); border-bottom: 1px solid rgba(232,200,154,0.3); padding-bottom: 2px; }
+  .other-card-watch svg { width: 12px; height: 12px; }
 
-  /* CV */
-  .cv-section {
-    background: var(--cream);
-    text-align: center;
-  }
+  /* ── CV ── */
+  .cv-section { background: var(--cream); text-align: center; }
   .cv-section .section-label { justify-content: center; }
   .cv-section .section-label::before { display: none; }
   .cv-section .section-title { text-align: center; margin: 0 auto 2rem; }
-  .cv-download {
-    display: inline-flex; align-items: center; gap: 0.7rem;
-    padding: 0.9rem 2.5rem;
-    background: var(--dark);
-    color: var(--cream);
-    text-decoration: none;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: background 0.2s, color 0.2s;
-  }
+  .cv-download { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.9rem 2.5rem; background: var(--dark); color: var(--cream); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; transition: background 0.2s; }
   .cv-download:hover { background: var(--accent); }
 
-  /* CONTACT */
-  .contact {
-    background: var(--dark);
-    color: var(--cream);
-    min-height: 50vh;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-    margin-top: 1rem;
-  }
-  .contact-intro {
-    font-family: var(--serif);
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    line-height: 1.3;
-    color: var(--cream);
-  }
+  /* ── CONTACT ── */
+  .contact { background: var(--dark); color: var(--cream); min-height: 50vh; display: flex; flex-direction: column; justify-content: center; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; margin-top: 1rem; }
+  .contact-intro { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.3; color: var(--cream); }
   .contact-intro em { font-style: italic; color: var(--accent-light); }
   .contact-links { display: flex; flex-direction: column; gap: 1.5rem; }
-  .contact-link {
-    display: flex; align-items: center; gap: 1.2rem;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(244,241,236,0.1);
-    padding-bottom: 1.2rem;
-    transition: border-color 0.2s;
-  }
+  .contact-link { display: flex; align-items: center; gap: 1.2rem; text-decoration: none; border-bottom: 1px solid rgba(244,241,236,0.1); padding-bottom: 1.2rem; transition: border-color 0.2s; }
   .contact-link:last-child { border-bottom: none; padding-bottom: 0; }
   .contact-link:hover { border-color: rgba(196,119,58,0.5); }
-  .contact-link-type {
-    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent-light);
-    min-width: 60px;
+  .contact-link-type { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light); min-width: 60px; }
+  .contact-link-value { font-size: 1rem; color: rgba(244,241,236,0.85); }
+
+  /* ── FOOTER ── */
+  footer { background: #0F0F0D; padding: 1.5rem 4vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  footer p { font-size: 0.72rem; color: rgba(244,241,236,0.3); letter-spacing: 0.06em; }
+
+  /* ══════════════════════════════
+     PAGE PROJET
+  ══════════════════════════════ */
+  #page-project {
+    min-height: 100vh;
+    padding-top: 80px;
+    animation: fadeIn 0.4s ease;
   }
-  .contact-link-value {
-    font-size: 1rem;
-    color: rgba(244,241,236,0.85);
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .proj-hero {
+    background: var(--dark);
+    padding: 4rem 4vw 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .proj-eyebrow { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-light); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; }
+  .proj-eyebrow::before { content: ''; display: block; width: 30px; height: 1px; background: var(--accent-light); }
+  .proj-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 5rem); color: var(--cream); line-height: 1.05; margin-bottom: 0.5rem; }
+  .proj-subtitle { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .proj-award-banner { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: rgba(196,119,58,0.1); border: 1px solid rgba(196,119,58,0.25); padding: 6px 14px; margin-bottom: 2.5rem; }
+
+  /* Video player */
+  .proj-video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    margin-top: 0;
+  }
+  .proj-video-wrap iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    border: none;
   }
 
-  /* FOOTER */
-  footer {
-    background: #0F0F0D;
-    padding: 1.5rem 4vw;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  footer p {
-    font-size: 0.72rem;
-    color: rgba(244,241,236,0.3);
-    letter-spacing: 0.06em;
-  }
+  /* Project body */
+  .proj-body { padding: 5rem 4vw; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr; gap: 6rem; align-items: start; }
+  .proj-synopsis-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .proj-synopsis-text { font-size: 1.05rem; color: var(--mid); line-height: 1.9; }
+  .proj-details { display: flex; flex-direction: column; gap: 1.5rem; }
+  .proj-detail { border-top: 1px solid var(--border); padding-top: 1rem; }
+  .proj-detail-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  .proj-detail-value { font-size: 0.95rem; color: var(--dark); font-weight: 400; }
 
-  /* MOBILE */
+  /* Gallery in project page */
+  .proj-gallery { padding: 0 4vw 5rem; max-width: 1200px; margin: 0 auto; }
+  .proj-gallery-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+  .proj-gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .proj-gallery-grid img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+
+  /* Back nav (in project page) */
+  .proj-next-section { background: var(--dark); padding: 3rem 4vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .proj-next-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,241,236,0.4); }
+  .proj-next-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--serif); font-size: 1.2rem; color: var(--cream); cursor: pointer; background: none; border: none; font-style: italic; transition: color 0.2s; }
+  .proj-next-btn:hover { color: var(--accent-light); }
+  .proj-next-btn svg { width: 18px; height: 18px; }
+
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .hero { grid-template-columns: 1fr; padding-top: 6rem; }
     .hero-image { display: none; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-grid, .contact-grid, .proj-body { grid-template-columns: 1fr; gap: 3rem; }
     .film-item { grid-template-columns: 1fr; }
     .film-images { padding-left: 0; }
+    .proj-gallery-grid { grid-template-columns: 1fr 1fr; }
     nav { padding: 1rem 5vw; }
     .nav-links { gap: 1.2rem; }
   }
@@ -454,226 +225,267 @@
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══ NAV ══ -->
 <nav>
-  <a href="#" class="nav-name">Yaëlle Gueguen</a>
-  <ul class="nav-links">
-    <li><a href="#films">Films</a></li>
-    <li><a href="#projets">Projets</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <span class="nav-name" onclick="showHome()">Yaëlle Gueguen</span>
+  <button class="nav-back" id="nav-back" onclick="showHome()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour aux projets
+  </button>
+  <ul class="nav-links" id="nav-main-links">
+    <li><a onclick="showHome(); setTimeout(()=>document.getElementById('films').scrollIntoView({behavior:'smooth'}),50)">Films</a></li>
+    <li><a onclick="showHome(); setTimeout(()=>document.getElementById('projets').scrollIntoView({behavior:'smooth'}),50)">Projets</a></li>
+    <li><a onclick="showHome(); setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),50)">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Image &amp; Réalisation</p>
-    <h1 class="hero-name">Yaëlle<br><em>Gueguen</em></h1>
-    <p class="hero-bio">Étudiante en dernière année à CinéCréatis Nantes, spécialisée en image. Passionnée par l'univers du cinéma et de la création visuelle, je recherche un stage en audiovisuel pour mettre en pratique mes compétences techniques et créatives.</p>
-    <a href="#contact" class="hero-cta">
-      Me contacter
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<!-- ══════════════════════════════
+     PAGE ACCUEIL
+══════════════════════════════ -->
+<div id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Image &amp; Réalisation</p>
+      <h1 class="hero-name">Yaëlle<br><em>Gueguen</em></h1>
+      <p class="hero-bio">Étudiante en dernière année à CinéCréatis Nantes, spécialisée en image. Passionnée par l'univers du cinéma et de la création visuelle, je recherche un stage en audiovisuel pour mettre en pratique mes compétences techniques et créatives.</p>
+      <a href="#contact" class="hero-cta" onclick="event.preventDefault(); document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Me contacter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-image">
+      <div class="hero-img-wrap">
+        <img id="hero-portrait" src="" alt="Yaëlle Gueguen">
+        <div class="hero-stats">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Films réalisés</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-label">À propos</div>
+    <h2 class="section-title">Spécialisée en image,<br>animée par les histoires vraies.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Étudiante en cinéma, réalisation et audiovisuel spécialité image à CinéCréatis Nantes, je termine ma troisième et dernière année de diplôme RNCP Niveau 6. Ma démarche cinématographique se construit autour d'une sensibilité particulière pour les récits intimes et les portraits humains profonds.</p>
+        <p>De la fiction dramatique au documentaire familial, en passant par la publicité et le clip musical, j'ai développé une polyvalence technique et artistique qui me permet d'aborder chaque projet avec rigueur et créativité.</p>
+        <p>Mon court-métrage <em>Maggie</em> a remporté le Prix du public au festival Les Rencontres du court-métrage d'Annemasse et a été sélectionné au concours de courts-métrages de fiction d'Arte en 2025.</p>
+      </div>
+      <div class="about-details">
+        <div class="detail-item">
+          <div class="detail-label">Formation</div>
+          <div class="detail-value">CinéCréatis Nantes — Diplôme RNCP Niv. 6 (2023–2026)<br>Université Rennes 2 — L1 Arts du spectacle (2021–2022)</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Logiciels</div>
+          <div class="detail-value">Adobe Premiere Pro · Photoshop · Illustrator<br>Final Cut Pro · DaVinci Resolve</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Langues</div>
+          <div class="detail-value">Français — natif · Anglais — B1 · Espagnol — A2</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Localisation</div>
+          <div class="detail-value">Nantes / Paris · Permis A1/B, véhiculée</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILMS -->
+  <section id="films">
+    <div class="films-header">
+      <div>
+        <div class="section-label">Réalisatrice</div>
+        <h2 class="section-title">Films</h2>
+      </div>
+    </div>
+    <div class="films-grid">
+
+      <!-- LE SAINT JEAN -->
+      <div class="film-item" onclick="openProject('saintjean')">
+        <div class="film-info">
+          <div class="film-meta"><span class="year">2026</span><span class="type">Fiction dramatique</span></div>
+          <span class="film-tag post">En post-production</span>
+          <h3 class="film-title">Le Saint Jean</h3>
+          <p class="film-synopsis">Un soir d'hiver 1962 à Paris, dans un club de jazz très fréquenté, un meurtre est commis. Jeanne va sans le vouloir trouver une pièce à conviction centrale pour l'enquête. Confrontée à un conflit moral, elle cherche à s'émanciper d'un mari méprisant.</p>
+        </div>
+        <div class="film-images" id="saintjean-imgs">
+          <div style="grid-column:1/-1; aspect-ratio:16/9; background:rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Images à venir</span>
+          </div>
+        </div>
+        <div class="film-arrow">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+
+      <!-- MAGGIE -->
+      <div class="film-item" onclick="openProject('maggie')">
+        <div class="film-info">
+          <div class="film-meta"><span class="year">2025</span><span class="type">Fiction dramatique</span></div>
+          <div class="film-award">★ Prix du public — Annemasse · Sélection Arte 2025</div>
+          <h3 class="film-title">Maggie</h3>
+          <p class="film-synopsis">Seul face à la ruine et à l'oubli, un agriculteur français isolé, écrasé par les dettes et la bureaucratie, confie son désespoir à son unique compagne restante : Maggie, sa dernière vache.</p>
+        </div>
+        <div class="film-images" id="maggie-imgs"></div>
+        <div class="film-arrow">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+
+      <!-- UNE HISTOIRE DE MARIN -->
+      <div class="film-item" onclick="openProject('marin')">
+        <div class="film-info">
+          <div class="film-meta"><span class="year">2024</span><span class="type">Documentaire</span></div>
+          <h3 class="film-title">Une histoire de marin</h3>
+          <p class="film-synopsis">Le 20 juin 1982, l'officier mécanicien Alain Mahé a participé au sauvetage de 66 Vietnamiens en mer de Chine. Muni d'une caméra Super 8, il a filmé ce sauvetage de migrants. Son témoignage enrichi d'archives nous montre l'importance de la mémoire.</p>
+        </div>
+        <div class="film-images" id="marin-imgs"></div>
+        <div class="film-arrow">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+
+      <!-- POUR UNE VIE -->
+      <div class="film-item" onclick="openProject('pourunevie')">
+        <div class="film-info">
+          <div class="film-meta"><span class="year">2023</span><span class="type">Fiction dramatique</span></div>
+          <h3 class="film-title">Pour une vie</h3>
+          <p class="film-synopsis">Dix ans après avoir perdu son père sous les yeux des pompiers, Justine devient secouriste à son tour. Lors d'une intervention, un souvenir traumatique refait surface. Face à un homme entre la vie et la mort, elle trouve la force de sauver.</p>
+        </div>
+        <div class="film-images" id="pourunevie-imgs"></div>
+        <div class="film-arrow">Voir le projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AUTRES PROJETS -->
+  <section class="other-projects" id="projets">
+    <div class="section-label">Collaborations &amp; autres projets</div>
+    <h2 class="section-title" style="color:var(--cream)">Autres réalisations</h2>
+    <div class="other-grid">
+
+      <div class="other-card no-link">
+        <div class="other-card-year">2026</div>
+        <div class="other-card-role">Cheffe électricienne</div>
+        <div class="other-card-title">Les Hérons</div>
+        <div class="other-card-synopsis">À travers une danse intime, deux corps racontent la fin d'un amour — de la complicité à la rupture. Une figure d'oiseau émerge peu à peu, symbolisant le départ de l'être aimé.</div>
+        <img id="herons-img" class="other-card-img" src="" alt="Les Hérons">
+      </div>
+
+      <div class="other-card no-link">
+        <div class="other-card-year">2025</div>
+        <div class="other-card-role">2nde Assistante caméra</div>
+        <div class="other-card-title">LU La Gourmandise</div>
+        <div class="other-card-synopsis">Dans un vernissage sophistiqué, une serveuse ignorée tente d'offrir des petits LU. Le bruit du biscuit attire soudain toute l'attention, délaissant les œuvres d'art pour les biscuits.</div>
+        <div id="lu-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:1.2rem;"></div>
+      </div>
+
+      <div class="other-card" onclick="openProject('8femmes')">
+        <div class="other-card-year">2024</div>
+        <div class="other-card-role">Cadreuse</div>
+        <div class="other-card-title">À la manière de 8 femmes</div>
+        <div class="other-card-synopsis">Reproduction fidèle d'une séquence issue du film de François Ozon. Exercice de style et d'observation qui exige rigueur technique et précision de cadre.</div>
+        <span class="other-card-watch">Visionner <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+
+      <div class="other-card no-link">
+        <div class="other-card-year">2023</div>
+        <div class="other-card-role">Monteuse &amp; Réalisatrice</div>
+        <div class="other-card-title">Les Rescapés du Monge</div>
+        <div class="other-card-synopsis">Mon grand-père Alain Mahé a participé au sauvetage de 66 Vietnamiens en mer de Chine en 1982. Archive Super 8 de neuf minutes intégrée au montage avec son témoignage.</div>
+        <img id="rescapes-img" class="other-card-img" src="" alt="Les Rescapés du Monge">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section class="cv-section">
+    <div class="section-label">Curriculum Vitae</div>
+    <h2 class="section-title">Télécharger mon CV</h2>
+    <p style="color:var(--muted); margin-bottom:2rem; font-size:0.95rem;">Retrouvez l'intégralité de mon parcours, compétences et expériences.</p>
+    <a href="CV_GUEGUEN_YAELLE_2026.pdf" download class="cv-download">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Télécharger le CV
     </a>
-  </div>
-  <div class="hero-image">
-    <div class="hero-img-wrap">
-      <img id="hero-portrait" src="" alt="Yaëlle Gueguen">
-      <div class="hero-stats">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Films réalisés</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="section-label">À propos</div>
-  <h2 class="section-title">Spécialisée en image,<br>animée par les histoires vraies.</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>Étudiante en cinéma, réalisation et audiovisuel spécialité image à CinéCréatis Nantes, je termine ma troisième et dernière année de diplôme RNCP Niveau 6. Ma démarche cinématographique se construit autour d'une sensibilité particulière pour les récits intimes et les portraits humains profonds.</p>
-      <p>De la fiction dramatique au documentaire familial, en passant par la publicité et le clip musical, j'ai développé une polyvalence technique et artistique qui me permet d'aborder chaque projet avec rigueur et créativité.</p>
-      <p>Mon court-métrage <em>Maggie</em> a remporté le Prix du public au festival Les Rencontres du court-métrage d'Annemasse et a été sélectionné au concours de courts-métrages de fiction d'Arte en 2025.</p>
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-label" style="color:var(--accent-light);">
+      <span style="display:block;width:30px;height:1px;background:var(--accent-light)"></span>
+      Contact
     </div>
-    <div class="about-details">
-      <div class="detail-item">
-        <div class="detail-label">Formation</div>
-        <div class="detail-value">CinéCréatis Nantes — Diplôme RNCP Niv. 6 (2023–2026)<br>Université Rennes 2 — L1 Arts du spectacle (2021–2022)</div>
+    <div class="contact-grid">
+      <p class="contact-intro">Disponible pour un <em>stage en audiovisuel</em> dès maintenant.</p>
+      <div class="contact-links">
+        <a href="tel:+33783684543" class="contact-link">
+          <span class="contact-link-type">Téléphone</span>
+          <span class="contact-link-value">07 83 68 45 43</span>
+        </a>
+        <a href="mailto:yaellegueguen@gmail.com" class="contact-link">
+          <span class="contact-link-type">Email</span>
+          <span class="contact-link-value">yaellegueguen@gmail.com</span>
+        </a>
+        <div class="contact-link" style="cursor:default;">
+          <span class="contact-link-type">École</span>
+          <span class="contact-link-value">CinéCréatis Nantes</span>
+        </div>
+        <div class="contact-link" style="cursor:default;border:none;padding-bottom:0;">
+          <span class="contact-link-type">Localisation</span>
+          <span class="contact-link-value">Nantes / Paris</span>
+        </div>
       </div>
-      <div class="detail-item">
-        <div class="detail-label">Logiciels</div>
-        <div class="detail-value">Adobe Premiere Pro · Photoshop · Illustrator<br>Final Cut Pro · DaVinci Resolve</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Langues</div>
-        <div class="detail-value">Français — natif<br>Anglais — B1 · Espagnol — A2</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Localisation</div>
-        <div class="detail-value">Nantes / Paris · Permis A1/B, véhiculée</div>
-      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Yaëlle Gueguen — Tous droits réservés</p>
+    <p>CinéCréatis Nantes · Spécialité Image</p>
+  </footer>
+
+</div><!-- /page-home -->
+
+
+<!-- ══════════════════════════════
+     PAGE PROJET
+══════════════════════════════ -->
+<div id="page-project">
+
+  <div class="proj-hero">
+    <div class="proj-hero-inner">
+      <div class="proj-eyebrow" id="proj-eyebrow">Réalisatrice · Fiction dramatique · 2025</div>
+      <div id="proj-award" class="proj-award-banner" style="display:none;">★ Prix du public — Annemasse · Sélection Arte 2025</div>
+      <h1 class="proj-title" id="proj-title">Maggie</h1>
+      <div class="proj-subtitle" id="proj-subtitle">Court-métrage · 15 min</div>
+    </div>
+    <div class="proj-video-wrap" id="proj-video-wrap">
+      <iframe id="proj-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     </div>
   </div>
-</section>
 
-<!-- FILMS -->
-<section id="films">
-  <div class="films-header">
+  <div class="proj-body">
     <div>
-      <div class="section-label">Réalisatrice</div>
-      <h2 class="section-title">Films</h2>
+      <div class="proj-synopsis-label">Synopsis</div>
+      <p class="proj-synopsis-text" id="proj-synopsis"></p>
     </div>
+    <div class="proj-details" id="proj-details"></div>
   </div>
-  <div class="films-grid">
 
-    <!-- LE SAINT JEAN -->
-    <div class="film-item">
-      <div class="film-info">
-        <div class="film-meta">
-          <span class="year">2026</span>
-          <span class="type">Fiction dramatique</span>
-        </div>
-        <span class="film-tag post">En post-production</span>
-        <h3 class="film-title">Le Saint Jean</h3>
-        <p class="film-synopsis">Un soir d'hiver 1962 à Paris, dans un club de jazz très fréquenté, un meurtre est commis. Jeanne, présente avec son mari Claude — commissaire de police —, va sans le vouloir trouver une pièce à conviction centrale pour l'enquête. Confrontée à un conflit moral entre dénoncer l'auteur et garder le silence, elle cherche à s'émanciper d'un mari méprisant.</p>
-      </div>
-      <div class="film-images" id="saintjean-imgs">
-        <!-- pas d'images disponibles pour ce projet -->
-        <div style="grid-column:1/-1; aspect-ratio:16/9; background:rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center;">
-          <span style="font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Images à venir</span>
-        </div>
-      </div>
-    </div>
+  <div class="proj-gallery" id="proj-gallery"></div>
 
-    <!-- MAGGIE -->
-    <div class="film-item">
-      <div class="film-info">
-        <div class="film-meta">
-          <span class="year">2025</span>
-          <span class="type">Fiction dramatique</span>
-        </div>
-        <div class="film-award">★ Prix du public — Annemasse · Sélection Arte 2025</div>
-        <h3 class="film-title">Maggie</h3>
-        <p class="film-synopsis">Seul face à la ruine et à l'oubli, un agriculteur français isolé, écrasé par les dettes et la bureaucratie, confie son désespoir à son unique compagne restante : Maggie, sa dernière vache.</p>
-      </div>
-      <div class="film-images" id="maggie-imgs"></div>
-    </div>
-
-    <!-- UNE HISTOIRE DE MARIN -->
-    <div class="film-item">
-      <div class="film-info">
-        <div class="film-meta">
-          <span class="year">2024</span>
-          <span class="type">Documentaire</span>
-        </div>
-        <h3 class="film-title">Une histoire de marin</h3>
-        <p class="film-synopsis">Le 20 juin 1982, l'officier mécanicien Alain Mahé a participé au sauvetage de 66 Vietnamiens en mer de Chine. Muni d'une caméra Super 8, il a filmé ce sauvetage de migrants qui ont quitté leur pays au péril de leurs vies. Son témoignage enrichi d'archives nous montre l'importance de la mémoire.</p>
-      </div>
-      <div class="film-images" id="marin-imgs"></div>
-    </div>
-
-    <!-- POUR UNE VIE -->
-    <div class="film-item">
-      <div class="film-info">
-        <div class="film-meta">
-          <span class="year">2023</span>
-          <span class="type">Fiction dramatique</span>
-        </div>
-        <h3 class="film-title">Pour une vie</h3>
-        <p class="film-synopsis">Dix ans après avoir perdu son père sous les yeux des pompiers, Justine devient secouriste à son tour. Lors d'une intervention, un souvenir traumatique refait surface : son chef était déjà présent le jour du drame. Face à un homme entre la vie et la mort, elle trouve la force de sauver celle qu'elle n'avait pas pu sauver autrefois.</p>
-      </div>
-      <div class="film-images" id="pourunevie-imgs"></div>
-    </div>
-
+  <div class="proj-next-section">
+    <span class="proj-next-label">Revenir au portfolio</span>
+    <button class="proj-next-btn" onclick="showHome()">
+      Tous les projets
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
   </div>
-</section>
 
-<!-- AUTRES PROJETS -->
-<section class="other-projects" id="projets">
-  <div class="section-label">Collaborations &amp; autres projets</div>
-  <h2 class="section-title" style="color:var(--cream)">Autres réalisations</h2>
-  <div class="other-grid" style="margin-top:3rem;">
+</div><!-- /page-project -->
 
-    <div class="other-card">
-      <div class="other-card-year">2026</div>
-      <div class="other-card-role">Cheffe électricienne</div>
-      <div class="other-card-title">Les Hérons</div>
-      <div class="other-card-synopsis">À travers une danse intime, deux corps racontent la fin d'un amour — de la complicité à la rupture. Une figure d'oiseau émerge peu à peu, symbolisant le départ de l'être aimé.</div>
-      <img id="herons-img" class="other-card-img" src="" alt="Les Hérons">
-    </div>
-
-    <div class="other-card">
-      <div class="other-card-year">2025</div>
-      <div class="other-card-role">2nde Assistante caméra</div>
-      <div class="other-card-title">LU La Gourmandise</div>
-      <div class="other-card-synopsis">Dans un vernissage sophistiqué, une serveuse ignorée tente d'offrir des petits LU. Le bruit du biscuit attire soudain toute l'attention, délaissant les œuvres d'art pour les biscuits.</div>
-      <div id="lu-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:1.2rem;"></div>
-    </div>
-
-    <div class="other-card">
-      <div class="other-card-year">2024</div>
-      <div class="other-card-role">Cadreuse</div>
-      <div class="other-card-title">À la manière de 8 femmes</div>
-      <div class="other-card-synopsis">Reproduction fidèle d'une séquence issue du film de François Ozon. Exercice de style et d'observation qui exige rigueur technique et précision de cadre.</div>
-    </div>
-
-    <div class="other-card">
-      <div class="other-card-year">2023</div>
-      <div class="other-card-role">Monteuse &amp; Réalisatrice</div>
-      <div class="other-card-title">Les Rescapés du Monge</div>
-      <div class="other-card-synopsis">Mon grand-père Alain Mahé a participé au sauvetage de 66 Vietnamiens en mer de Chine en 1982. J'ai retrouvé une archive Super 8 de neuf minutes filmée par lui, que j'ai intégrée au montage avec son témoignage.</div>
-      <img id="rescapes-img" class="other-card-img" src="" alt="Les Rescapés du Monge">
-    </div>
-
-  </div>
-</section>
-
-<!-- CV -->
-<section class="cv-section">
-  <div class="section-label">Curriculum Vitae</div>
-  <h2 class="section-title">Télécharger mon CV</h2>
-  <p style="color:var(--muted); margin-bottom:2rem; font-size:0.95rem;">Retrouvez l'intégralité de mon parcours, compétences et expériences.</p>
-  <a href="CV_GUEGUEN_YAELLE_2026.pdf" download class="cv-download">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-    Télécharger le CV
-  </a>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-label" style="color:var(--accent-light);">
-    <span style="display:block;width:30px;height:1px;background:var(--accent-light)"></span>
-    Contact
-  </div>
-  <div class="contact-grid">
-    <p class="contact-intro">Disponible pour un <em>stage en audiovisuel</em> dès maintenant.</p>
-    <div class="contact-links">
-      <a href="tel:+33783684543" class="contact-link">
-        <span class="contact-link-type">Téléphone</span>
-        <span class="contact-link-value">07 83 68 45 43</span>
-      </a>
-      <a href="mailto:yaellegueguen@gmail.com" class="contact-link">
-        <span class="contact-link-type">Email</span>
-        <span class="contact-link-value">yaellegueguen@gmail.com</span>
-      </a>
-      <div class="contact-link" style="cursor:default;">
-        <span class="contact-link-type">École</span>
-        <span class="contact-link-value">CinéCréatis Nantes</span>
-      </div>
-      <div class="contact-link" style="cursor:default;border:none;padding-bottom:0;">
-        <span class="contact-link-type">Localisation</span>
-        <span class="contact-link-value">Nantes / Paris</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Yaëlle Gueguen — Tous droits réservés</p>
-  <p>CinéCréatis Nantes · Spécialité Image</p>
-</footer>
 
 <script>
 const IMAGES = {
@@ -702,11 +514,161 @@ const IMAGES = {
 
 </script>
 <script>
+/* ── DATA ── */
+var PROJECTS = {
+  saintjean: {
+    title: 'Le Saint Jean',
+    eyebrow: 'Réalisatrice · Fiction dramatique · 2026',
+    subtitle: 'Court-métrage · En post-production',
+    award: false,
+    youtubeId: null,
+    synopsis: "Un soir d'hiver 1962 à Paris, dans un club de jazz très fréquenté, un meurtre est commis. Jeanne, présente avec son mari Claude — commissaire de police —, va sans le vouloir trouver une pièce à conviction centrale pour l'enquête. En quête d'émancipation et contrainte par un mari méprisant, Jeanne va être confrontée à un conflit moral entre dénoncer l'auteur de ce meurtre et garder le silence.",
+    details: [
+      { label: 'Année', value: '2026' },
+      { label: 'Genre', value: 'Fiction dramatique' },
+      { label: 'Rôle', value: 'Réalisatrice' },
+      { label: 'Statut', value: 'En post-production' },
+      { label: 'École', value: 'CinéCréatis Nantes' }
+    ],
+    gallery: []
+  },
+  maggie: {
+    title: 'Maggie',
+    eyebrow: 'Réalisatrice · Fiction dramatique · 2025',
+    subtitle: 'Court-métrage',
+    award: true,
+    youtubeId: 'RtSwJW-sq3k',
+    synopsis: "Seul face à la ruine et à l'oubli, un agriculteur français isolé, écrasé par les dettes et la bureaucratie, aspire à être reconnu. Impuissant face à un système qui le broie, il confie son désespoir et ses derniers espoirs à son unique compagne restante : Maggie, sa dernière vache.",
+    details: [
+      { label: 'Année', value: '2025' },
+      { label: 'Genre', value: 'Fiction dramatique' },
+      { label: 'Rôle', value: 'Réalisatrice' },
+      { label: 'Distinctions', value: 'Prix du public — Les Rencontres du court-métrage d\'Annemasse\nSélection Arte 2025' },
+      { label: 'École', value: 'CinéCréatis Nantes' }
+    ],
+    gallery: ['PHOTO_MAGGIE1','PHOTO_MAGGIE2','PHOTO_MAGGIE3']
+  },
+  marin: {
+    title: 'Une histoire de marin',
+    eyebrow: 'Réalisatrice · Documentaire · 2024',
+    subtitle: 'Documentaire',
+    award: false,
+    youtubeId: 'MiQy7J-ZckY',
+    synopsis: "Le 20 juin 1982, l'officier mécanicien Alain Mahé a participé au sauvetage de 66 Vietnamiens en mer de Chine, plus communément appelés des Boat People. Munie d'une caméra Super 8, Alain a pu filmer le sauvetage de ces migrants vietnamiens qui ont quitté leur pays au péril de leurs vies. Son témoignage, enrichi par ses archives, nous montre l'importance de la mémoire, afin de la préserver et de mettre en lumière un mouvement migratoire peu connu du grand public.",
+    details: [
+      { label: 'Année', value: '2024' },
+      { label: 'Genre', value: 'Documentaire' },
+      { label: 'Rôle', value: 'Réalisatrice' },
+      { label: 'École', value: 'CinéCréatis Nantes' }
+    ],
+    gallery: ['PHOTO_MARIN1','PHOTO_MARIN2','PHOTO_MARIN3']
+  },
+  pourunevie: {
+    title: 'Pour une vie',
+    eyebrow: 'Réalisatrice · Fiction dramatique · 2023',
+    subtitle: 'Court-métrage',
+    award: false,
+    youtubeId: 'HdjokoMY23I',
+    synopsis: "Dix ans après avoir perdu son père sous les yeux des pompiers, Justine devient secouriste à son tour. Lors d'une intervention, un souvenir traumatique refait surface : son chef était déjà présent le jour du drame. Face à un homme entre la vie et la mort, elle trouve enfin la force de sauver celle qu'elle n'avait pas pu sauver autrefois.",
+    details: [
+      { label: 'Année', value: '2023' },
+      { label: 'Genre', value: 'Fiction dramatique' },
+      { label: 'Rôle', value: 'Réalisatrice' },
+      { label: 'École', value: 'CinéCréatis Nantes' }
+    ],
+    gallery: ['MINICOURT_PHOTO_1','MINI_COURT_PHOTO_2','MINI_COURT_PHOTO_3']
+  },
+  '8femmes': {
+    title: 'À la manière de 8 femmes',
+    eyebrow: 'Cadreuse · Exercice de style · 2024',
+    subtitle: 'Exercice académique',
+    award: false,
+    youtubeId: 'e0a1XOJZZC0',
+    synopsis: "Le projet « À la manière de… » consiste à reproduire fidèlement une séquence issue d'un film de fiction ou d'un court-métrage. Pour cet exercice, la séquence choisie est tirée du film 8 femmes de François Ozon. Un exercice de style exigeant, qui demande une maîtrise rigoureuse du cadre, de la lumière et de la direction d'acteurs.",
+    details: [
+      { label: 'Année', value: '2024' },
+      { label: 'Genre', value: 'Exercice de style' },
+      { label: 'Rôle', value: 'Cadreuse' },
+      { label: 'Référence', value: '8 femmes — François Ozon' },
+      { label: 'École', value: 'CinéCréatis Nantes' }
+    ],
+    gallery: []
+  }
+};
+
+/* ── NAVIGATION ── */
+function openProject(id) {
+  var p = PROJECTS[id];
+  if (!p) return;
+
+  // Populate fields
+  document.getElementById('proj-eyebrow').textContent = p.eyebrow;
+  document.getElementById('proj-title').textContent = p.title;
+  document.getElementById('proj-subtitle').textContent = p.subtitle;
+  document.getElementById('proj-synopsis').textContent = p.synopsis;
+
+  var awardEl = document.getElementById('proj-award');
+  awardEl.style.display = p.award ? 'inline-flex' : 'none';
+
+  // YouTube embed
+  var iframeWrap = document.getElementById('proj-video-wrap');
+  var iframe = document.getElementById('proj-iframe');
+  if (p.youtubeId) {
+    iframe.src = 'https://www.youtube.com/embed/' + p.youtubeId + '?rel=0&modestbranding=1';
+    iframeWrap.style.display = 'block';
+  } else {
+    iframe.src = '';
+    iframeWrap.style.display = 'none';
+  }
+
+  // Details
+  var detailsEl = document.getElementById('proj-details');
+  detailsEl.innerHTML = '';
+  p.details.forEach(function(d) {
+    detailsEl.innerHTML += '<div class="proj-detail"><div class="proj-detail-label">' + d.label + '</div><div class="proj-detail-value">' + d.value.replace('\n','<br>') + '</div></div>';
+  });
+
+  // Gallery
+  var galleryEl = document.getElementById('proj-gallery');
+  if (p.gallery && p.gallery.length) {
+    var grid = '<div class="proj-gallery-label">Extraits</div><div class="proj-gallery-grid">';
+    p.gallery.forEach(function(k) {
+      if (IMAGES[k]) grid += '<img src="' + IMAGES[k] + '" alt="' + p.title + '">';
+    });
+    grid += '</div>';
+    galleryEl.innerHTML = grid;
+    galleryEl.style.display = 'block';
+  } else {
+    galleryEl.innerHTML = '';
+    galleryEl.style.display = 'none';
+  }
+
+  // Switch pages
+  document.getElementById('page-home').style.display = 'none';
+  document.getElementById('page-project').style.display = 'block';
+  document.getElementById('nav-back').style.display = 'flex';
+  document.getElementById('nav-main-links').style.display = 'none';
+  window.scrollTo(0, 0);
+  document.title = p.title + ' — Yaëlle Gueguen';
+}
+
+function showHome() {
+  // Stop video
+  var iframe = document.getElementById('proj-iframe');
+  iframe.src = iframe.src;
+
+  document.getElementById('page-home').style.display = 'block';
+  document.getElementById('page-project').style.display = 'none';
+  document.getElementById('nav-back').style.display = 'none';
+  document.getElementById('nav-main-links').style.display = 'flex';
+  document.title = 'Yaëlle Gueguen — Portfolio Cinéma';
+}
+
+/* ── IMAGE INJECTION ── */
 function setImg(id, key) {
   var el = document.getElementById(id);
   if (el && IMAGES[key]) el.src = IMAGES[key];
 }
-
 function makeImgEl(key, alt) {
   var img = document.createElement('img');
   img.src = IMAGES[key] || '';
@@ -714,67 +676,43 @@ function makeImgEl(key, alt) {
   return img;
 }
 
-// Hero portrait
-var heroPortrait = document.getElementById('hero-portrait');
-if (heroPortrait && IMAGES['PHOTO_PORTRAIT']) {
-  heroPortrait.src = IMAGES['PHOTO_PORTRAIT'];
-}
+// Hero
+setImg('hero-portrait', 'PHOTO_PORTRAIT');
 
-// Maggie images
+// Maggie
 var maggieDiv = document.getElementById('maggie-imgs');
-if (maggieDiv) {
-  ['PHOTO_MAGGIE1','PHOTO_MAGGIE2','PHOTO_MAGGIE3'].forEach(function(k) {
-    if (IMAGES[k]) {
-      var img = makeImgEl(k, 'Maggie');
-      maggieDiv.appendChild(img);
-    }
-  });
-}
+['PHOTO_MAGGIE1','PHOTO_MAGGIE2','PHOTO_MAGGIE3'].forEach(function(k) {
+  if (IMAGES[k]) maggieDiv.appendChild(makeImgEl(k, 'Maggie'));
+});
 
-// Marin images  
+// Marin
 var marinDiv = document.getElementById('marin-imgs');
-if (marinDiv) {
-  ['PHOTO_MARIN1','PHOTO_MARIN2','PHOTO_MARIN3'].forEach(function(k) {
-    if (IMAGES[k]) {
-      var img = makeImgEl(k, 'Une histoire de marin');
-      marinDiv.appendChild(img);
-    }
-  });
-}
+['PHOTO_MARIN1','PHOTO_MARIN2','PHOTO_MARIN3'].forEach(function(k) {
+  if (IMAGES[k]) marinDiv.appendChild(makeImgEl(k, 'Une histoire de marin'));
+});
 
-// Pour une vie — MINI_COURT photos
+// Pour une vie
 var pvDiv = document.getElementById('pourunevie-imgs');
-if (pvDiv) {
-  ['MINICOURT_PHOTO_1','MINI_COURT_PHOTO_2','MINI_COURT_PHOTO_3'].forEach(function(k) {
-    if (IMAGES[k]) {
-      var img = makeImgEl(k, 'Pour une vie');
-      pvDiv.appendChild(img);
-    }
-  });
-}
+['MINICOURT_PHOTO_1','MINI_COURT_PHOTO_2','MINI_COURT_PHOTO_3'].forEach(function(k) {
+  if (IMAGES[k]) pvDiv.appendChild(makeImgEl(k, 'Pour une vie'));
+});
 
 // Hérons
 setImg('herons-img', 'PHOTO_HERONS1');
 
-// 8 femmes card — no separate img needed (was minicourt, now minicourt = Pour une vie)
-var minicourt8 = document.getElementById('minicourt-img');
-if (minicourt8) minicourt8.remove();
-
 // Rescapés
 setImg('rescapes-img', 'PHOTO_LES_RESCAPES_DU_MONGE1');
 
-// LU La Gourmandise — inject images into card
+// LU
 var luCard = document.getElementById('lu-imgs');
-if (luCard) {
-  ['PHOTO_PUB1','PHOTO_PUB2','PHOTO_PUB3'].forEach(function(k) {
-    if (IMAGES[k]) {
-      var img = makeImgEl(k, 'LU La Gourmandise');
-      img.className = 'other-card-img';
-      img.style.marginTop = '0';
-      luCard.appendChild(img);
-    }
-  });
-}
+['PHOTO_PUB1','PHOTO_PUB2','PHOTO_PUB3'].forEach(function(k) {
+  if (IMAGES[k]) {
+    var img = makeImgEl(k, 'LU La Gourmandise');
+    img.className = 'other-card-img';
+    img.style.marginTop = '0';
+    luCard.appendChild(img);
+  }
+});
 </script>
 
 </body>
