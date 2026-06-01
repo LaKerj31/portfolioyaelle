@@ -55,8 +55,8 @@
   #page-project { display: none; }
 
   /* ── HERO ── */
-  .hero { min-height: 100vh; display: grid; grid-template-columns: 2fr 3fr; align-items: center; padding: 8rem 0 4rem; gap: 0; width: 100%; }
-  .hero-text { padding: 0 4vw 0 6vw; }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; padding: 8rem 0 4rem; gap: 0; width: 100%; }
+  .hero-text { grid-column: 1; padding: 0 3vw 0 5vw; }
   .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
   .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--accent); }
   .hero-name { font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); line-height: 1.05; color: var(--dark); margin-bottom: 1.5rem; }
@@ -65,8 +65,8 @@
   .hero-cta { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dark); text-decoration: none; border-bottom: 1px solid #1E3A5F; padding-bottom: 2px; transition: color 0.2s; }
   .hero-cta:hover { color: var(--accent); }
   .hero-cta svg { width: 14px; height: 14px; }
-  .hero-image { position: relative; align-self: stretch; display: flex; align-items: center; overflow: hidden; }
-  .hero-img-wrap { position: relative; width: 100%; max-width: 420px; margin: auto; }
+  .hero-image { grid-column: 2 / 4; position: relative; align-self: stretch; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-img-wrap { position: relative; width: clamp(240px, 38vw, 480px); margin: 4rem auto; }
   .hero-img-wrap::before { display: none; }
   .hero-img-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; position: relative; z-index: 1; filter: grayscale(10%); display: block; }
   .hero-stats { position: absolute; bottom: -1rem; left: -2rem; background: var(--dark); color: var(--cream); padding: 1.2rem 1.6rem; z-index: 2; min-width: 140px; }
@@ -264,8 +264,9 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .hero { grid-template-columns: 1fr; padding-top: 6rem; }
-    .hero { grid-template-columns: 2fr 3fr; padding-top: 6rem; }
-    .hero-text { padding: 0 3vw 0 4vw; }
+    .hero { grid-template-columns: 1fr; padding-top: 6rem; }
+    .hero-text { grid-column: 1; padding: 0 5vw; }
+    .hero-image { grid-column: 1; }
     .about-grid, .contact-grid, .proj-body { grid-template-columns: 1fr; gap: 3rem; }
     .film-item { grid-template-columns: 1fr; }
     .film-images { padding-left: 0; }
@@ -451,6 +452,7 @@
     <li><a onclick="showHome(); setTimeout(()=>document.getElementById('competences').scrollIntoView({behavior:'smooth'}),50)">Compétences</a></li>
     <li><a onclick="showHome(); setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),50)">Contact</a></li>
   </ul>
+  <button id="lang-btn" onclick="toggleLang()" style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--border);padding:0.35rem 0.8rem;cursor:pointer;font-family:var(--sans);transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--dark)';this.style.borderColor='var(--dark)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">EN</button>
 </nav>
 
 <!-- ══════════════════════════════
@@ -1020,6 +1022,260 @@ setPageHeight();
 window.addEventListener('resize', setPageHeight);
 // Re-set after images load
 window.addEventListener('load', setPageHeight);
+
+
+// ── TRANSLATION ──
+var LANG = 'fr';
+
+var TRANSLATIONS = {
+  fr: {
+    'nav-projets': 'Projets',
+    'nav-competences': 'Compétences',
+    'nav-contact': 'Contact',
+    'nav-back-text': 'Retour aux projets',
+    'lang-btn': 'EN',
+    'hero-eyebrow': 'Image & Réalisation',
+    'hero-name': 'Yaëlle<br><em>Gueguen</em>',
+    'hero-bio': "Étudiante en dernière année à CinéCréatis Nantes, spécialisée en image. Passionnée par l'univers du cinéma et de la création visuelle, je recherche un stage en audiovisuel pour mettre en pratique mes compétences techniques et créatives.",
+    'hero-cta': 'Me contacter',
+    'stat-label': 'Films réalisés',
+    'projets-label': 'Tous les projets',
+    'competences-label': 'Compétences',
+    'contact-label': 'Contact',
+    'contact-intro': 'Disponible pour un <em>stage en audiovisuel</em> dès maintenant.',
+    'contact-tel-type': 'Téléphone',
+    'contact-mail-type': 'Email',
+    'contact-school-type': 'École',
+    'contact-loc-type': 'Localisation',
+    'cv-btn': 'Télécharger le CV',
+    'formation-label': 'Formation',
+    'logiciels-label': 'Logiciels',
+    'langues-label': 'Langues',
+    'lang-fr': 'Natif',
+    'lang-en': 'B1',
+    'lang-es': 'A2',
+    'footer-1': '© 2026 Yaëlle Gueguen — Tous droits réservés',
+    'footer-2': 'CinéCréatis Nantes · Spécialité Image',
+    'post-prod': 'En post-production',
+    'award-text': '★ Prix du public · Sélection Arte',
+    'tag-real': 'Réalisatrice',
+    'tag-real-mont': 'Réalisatrice · Monteuse',
+    'tag-elec': 'Cheffe électricienne',
+    'tag-2ac': '2nde Assistante caméra',
+    'tag-cadre': 'Cadreuse',
+    'tag-fiction': 'Fiction dramatique',
+    'tag-doc': 'Documentaire',
+    'tag-clip': 'Clip musical',
+    'tag-pub': 'Publicité',
+    'tag-exercice': 'Exercice de style',
+    'proj-back': 'Retour aux projets',
+    'proj-all': 'Tous les projets',
+  },
+  en: {
+    'nav-projets': 'Projects',
+    'nav-competences': 'Skills',
+    'nav-contact': 'Contact',
+    'nav-back-text': 'Back to projects',
+    'lang-btn': 'FR',
+    'hero-eyebrow': 'Image & Direction',
+    'hero-name': 'Yaëlle<br><em>Gueguen</em>',
+    'hero-bio': "Final-year student at CinéCréatis Nantes, specialising in cinematography. Passionate about cinema and visual creation, I am looking for an internship in the audiovisual industry to put my technical and creative skills into practice.",
+    'hero-cta': 'Get in touch',
+    'stat-label': 'Films directed',
+    'projets-label': 'All projects',
+    'competences-label': 'Skills',
+    'contact-label': 'Contact',
+    'contact-intro': 'Available for an <em>audiovisual internship</em> right now.',
+    'contact-tel-type': 'Phone',
+    'contact-mail-type': 'Email',
+    'contact-school-type': 'School',
+    'contact-loc-type': 'Location',
+    'cv-btn': 'Download CV',
+    'formation-label': 'Education',
+    'logiciels-label': 'Software',
+    'langues-label': 'Languages',
+    'lang-fr': 'Native',
+    'lang-en': 'B1',
+    'lang-es': 'A2',
+    'footer-1': '© 2026 Yaëlle Gueguen — All rights reserved',
+    'footer-2': 'CinéCréatis Nantes · Cinematography',
+    'post-prod': 'In post-production',
+    'award-text': '★ Audience Award · Arte Selection',
+    'tag-real': 'Director',
+    'tag-real-mont': 'Director · Editor',
+    'tag-elec': 'Gaffer',
+    'tag-2ac': '2nd Camera Assistant',
+    'tag-cadre': 'Camera Operator',
+    'tag-fiction': 'Drama',
+    'tag-doc': 'Documentary',
+    'tag-clip': 'Music video',
+    'tag-pub': 'Commercial',
+    'tag-exercice': 'Style exercise',
+    'proj-back': 'Back to projects',
+    'proj-all': 'All projects',
+  }
+};
+
+var PROJECT_TRANSLATIONS = {
+  saintjean: {
+    fr: { eyebrow: 'Réalisatrice · Fiction dramatique · 2026', subtitle: 'Court-métrage · En post-production', synopsis: "Un soir d'hiver 1962 à Paris, dans un club de jazz très fréquenté, un meurtre est commis. Jeanne, présente avec son mari Claude — commissaire de police —, va sans le vouloir trouver une pièce à conviction centrale pour l'enquête. En quête d'émancipation et contrainte par un mari méprisant, Jeanne va être confrontée à un conflit moral entre dénoncer l'auteur de ce meurtre et garder le silence." },
+    en: { eyebrow: 'Director · Drama · 2026', subtitle: 'Short film · In post-production', synopsis: "On a winter evening in 1962 Paris, a murder is committed in a packed jazz club. Jeanne, present with her husband Claude — a police commissioner — unwittingly discovers a key piece of evidence. Seeking emancipation and constrained by a contemptuous husband, Jeanne faces a moral dilemma: expose the killer or stay silent." }
+  },
+  maggie: {
+    fr: { eyebrow: 'Réalisatrice · Fiction dramatique · 2025', subtitle: 'Court-métrage', synopsis: "Seul face à la ruine et à l'oubli, un agriculteur français isolé, écrasé par les dettes et la bureaucratie, aspire à être reconnu. Impuissant face à un système qui le broie, il confie son désespoir et ses derniers espoirs à son unique compagne restante : Maggie, sa dernière vache." },
+    en: { eyebrow: 'Director · Drama · 2025', subtitle: 'Short film', synopsis: "Alone, facing ruin and oblivion, an isolated French farmer crushed by debt and bureaucracy longs to be seen. Powerless against a system that grinds him down, he confides his despair and last hopes to his only remaining companion: Maggie, his last cow." }
+  },
+  marin: {
+    fr: { eyebrow: 'Réalisatrice · Documentaire · 2024', subtitle: 'Documentaire', synopsis: "Le 20 juin 1982, l'officier mécanicien Alain Mahé a participé au sauvetage de 66 Vietnamiens en mer de Chine, plus communément appelés des Boat People. Munie d'une caméra Super 8, Alain a pu filmer le sauvetage de ces migrants vietnamiens qui ont quitté leur pays au péril de leurs vies. Son témoignage, enrichi par ses archives, nous montre l'importance de la mémoire, afin de la préserver et de mettre en lumière un mouvement migratoire peu connu du grand public." },
+    en: { eyebrow: 'Director · Documentary · 2024', subtitle: 'Documentary', synopsis: "On June 20, 1982, chief engineer Alain Mahé took part in the rescue of 66 Vietnamese refugees in the South China Sea. Armed with a Super 8 camera, he filmed the rescue of these migrants who had fled their country at the risk of their lives. His testimony, enriched by personal archives, highlights the importance of memory and sheds light on a migration movement little known to the general public." }
+  },
+  pourunevie: {
+    fr: { eyebrow: 'Réalisatrice · Fiction dramatique · 2023', subtitle: 'Court-métrage', synopsis: "Dix ans après avoir perdu son père sous les yeux des pompiers, Justine devient secouriste à son tour. Lors d'une intervention, un souvenir traumatique refait surface : son chef était déjà présent le jour du drame. Face à un homme entre la vie et la mort, elle trouve enfin la force de sauver celle qu'elle n'avait pas pu sauver autrefois." },
+    en: { eyebrow: 'Director · Drama · 2023', subtitle: 'Short film', synopsis: "Ten years after losing her father in front of firefighters, Justine becomes a paramedic herself. During an emergency call, a traumatic memory resurfaces: her chief was already there the day of the tragedy. Faced with a man between life and death, she finally finds the strength to save the one she couldn't save back then." }
+  },
+  herons: {
+    fr: { eyebrow: 'Cheffe électricienne · Clip musical · 2026', subtitle: 'Clip autobiographique', synopsis: "À travers une danse intime, deux corps racontent la fin d'un amour : de la complicité à la rupture. Inspirée d'un tatouage de héron lié à cette ancienne relation, une figure d'oiseau émerge peu à peu, symbolisant le départ de l'être aimé. Entre perte et acceptation, le film explore la reconstruction après la séparation." },
+    en: { eyebrow: 'Gaffer · Music video · 2026', subtitle: 'Autobiographical music video', synopsis: "Through an intimate dance, two bodies tell the story of the end of a love: from closeness to rupture. Inspired by a heron tattoo linked to a past relationship, a bird figure slowly emerges, symbolising the departure of the loved one. Between loss and acceptance, the film explores rebuilding after separation." }
+  },
+  lu: {
+    fr: { eyebrow: '2nde Assistante caméra · Publicité · 2025', subtitle: 'Publicité', synopsis: "Dans un vernissage sophistiqué, Sarina, une serveuse ignorée par les invités, tente d'offrir des petits LU. Lorsqu'une photographe extravagante en croque un, le bruit du biscuit attire soudain toute l'attention : les convives délaissent les œuvres d'art pour se ruer sur les biscuits." },
+    en: { eyebrow: '2nd Camera Assistant · Commercial · 2025', subtitle: 'Commercial', synopsis: "At a sophisticated art opening, Sarina, a waitress ignored by the guests, tries to offer LU biscuits. When an extravagant photographer bites into one, the crunch suddenly draws all attention: the guests abandon the artworks and rush for the biscuits." }
+  },
+  '8femmes': {
+    fr: { eyebrow: 'Cadreuse · Exercice de style · 2024', subtitle: 'Exercice académique', synopsis: "Le projet « À la manière de… » consiste à reproduire fidèlement une séquence issue d'un film de fiction ou d'un court-métrage. Pour cet exercice, la séquence choisie est tirée du film 8 femmes de François Ozon. Un exercice de style exigeant, qui demande une maîtrise rigoureuse du cadre, de la lumière et de la direction d'acteurs." },
+    en: { eyebrow: 'Camera Operator · Style exercise · 2024', subtitle: 'Academic exercise', synopsis: "The « In the style of… » project consists of faithfully reproducing a sequence from a fiction film or short. For this exercise, the chosen sequence is from François Ozon's 8 Women. A demanding style exercise requiring rigorous mastery of framing, lighting and actor direction." }
+  },
+  rescapes: {
+    fr: { eyebrow: 'Réalisatrice · Monteuse · Documentaire · 2023', subtitle: 'Documentaire', synopsis: "Le 20 juin 1982, mon grand-père, l'officier mécanicien Alain Mahé, a participé au sauvetage de 66 Vietnamiens en mer de Chine, alors appelés les Boat People. J'ai eu la chance de retrouver une archive de neuf minutes filmée par lui-même avec sa caméra Super 8, que j'ai intégrée au montage en y associant son témoignage." },
+    en: { eyebrow: 'Director · Editor · Documentary · 2023', subtitle: 'Documentary', synopsis: "On June 20, 1982, my grandfather, chief engineer Alain Mahé, took part in the rescue of 66 Vietnamese refugees in the South China Sea, then known as Boat People. I had the chance to find a nine-minute archive he filmed himself with his Super 8 camera, which I integrated into the edit alongside his testimony." }
+  }
+};
+
+function toggleLang() {
+  LANG = LANG === 'fr' ? 'en' : 'fr';
+  var t = TRANSLATIONS[LANG];
+
+  // Nav
+  document.getElementById('lang-btn').textContent = t['lang-btn'];
+  var navLinks = document.querySelectorAll('#nav-main-links a');
+  if (navLinks[0]) navLinks[0].textContent = t['nav-projets'];
+  if (navLinks[1]) navLinks[1].textContent = t['nav-competences'];
+  if (navLinks[2]) navLinks[2].textContent = t['nav-contact'];
+  var backBtn = document.getElementById('nav-back');
+  if (backBtn) backBtn.childNodes[backBtn.childNodes.length-1].textContent = ' ' + t['nav-back-text'];
+
+  // Hero
+  var eyebrow = document.querySelector('.hero-eyebrow');
+  if (eyebrow) eyebrow.childNodes[eyebrow.childNodes.length-1].textContent = t['hero-eyebrow'].replace('&amp;','&');
+  document.querySelector('.hero-name').innerHTML = t['hero-name'];
+  document.querySelector('.hero-bio').textContent = t['hero-bio'];
+  var cta = document.querySelector('.hero-cta');
+  if (cta) cta.childNodes[0].textContent = t['hero-cta'];
+  document.querySelector('.stat-label').textContent = t['stat-label'];
+
+  // Section labels
+  var labels = document.querySelectorAll('.section-label');
+  labels.forEach(function(el) {
+    var txt = el.textContent.trim();
+    if (txt === 'Tous les projets' || txt === 'All projects') {
+      el.lastChild.textContent = t['projets-label'];
+    } else if (txt === 'Compétences' || txt === 'Skills') {
+      el.lastChild.textContent = t['competences-label'];
+    } else if (txt === 'Contact') {
+      el.lastChild.textContent = t['contact-label'];
+    }
+  });
+
+  // Contact
+  var intro = document.querySelector('.contact-intro');
+  if (intro) intro.innerHTML = t['contact-intro'];
+  var types = document.querySelectorAll('.contact-link-type');
+  var typeKeys = ['contact-tel-type','contact-mail-type','contact-school-type','contact-loc-type'];
+  types.forEach(function(el, i) { if (typeKeys[i]) el.textContent = t[typeKeys[i]]; });
+
+  // CV buttons
+  document.querySelectorAll('#cv-dl-btn, #cv-contact-btn').forEach(function(el) {
+    if (el) el.childNodes[el.childNodes.length-1].textContent = ' ' + t['cv-btn'];
+  });
+
+  // Compétences detail labels
+  var detailLabels = document.querySelectorAll('.detail-label, .about-col .detail-label');
+  detailLabels.forEach(function(el) {
+    var txt = el.textContent.trim();
+    if (txt === 'Formation' || txt === 'Education') el.textContent = t['formation-label'];
+    else if (txt === 'Logiciels' || txt === 'Software') el.textContent = t['logiciels-label'];
+    else if (txt === 'Langues' || txt === 'Languages') el.textContent = t['langues-label'];
+  });
+
+  // Lang levels
+  var langLevels = document.querySelectorAll('.lang-level');
+  if (langLevels[0]) langLevels[0].textContent = t['lang-fr'];
+
+  // Footer
+  var fps = document.querySelectorAll('footer p');
+  if (fps[0]) fps[0].textContent = t['footer-1'];
+  if (fps[1]) fps[1].textContent = t['footer-2'];
+
+  // Cards
+  var cards = document.querySelectorAll('.pcard');
+  var cardIds = ['saintjean','maggie','marin','pourunevie','herons','lu','8femmes','rescapes'];
+  cards.forEach(function(card, i) {
+    var id = cardIds[i];
+    if (!id || !PROJECT_TRANSLATIONS[id]) return;
+    var pt = PROJECT_TRANSLATIONS[id][LANG];
+    // badge post
+    var post = card.querySelector('.pcard-badge.post');
+    if (post) post.textContent = t['post-prod'];
+    // badge award
+    var award = card.querySelector('.pcard-badge.award');
+    if (award) award.textContent = t['award-text'];
+    // tags
+    var tags = card.querySelectorAll('.pcard-tag');
+    tags.forEach(function(tag) {
+      var tc = tag.textContent.trim();
+      var map = {
+        'Réalisatrice':'tag-real','Director':'tag-real',
+        'Réalisatrice · Monteuse':'tag-real-mont','Director · Editor':'tag-real-mont',
+        'Cheffe électricienne':'tag-elec','Gaffer':'tag-elec',
+        '2nde Assistante caméra':'tag-2ac','2nd Camera Assistant':'tag-2ac',
+        'Cadreuse':'tag-cadre','Camera Operator':'tag-cadre',
+        'Fiction dramatique':'tag-fiction','Drama':'tag-fiction',
+        'Documentaire':'tag-doc','Documentary':'tag-doc',
+        'Clip musical':'tag-clip','Music video':'tag-clip',
+        'Publicité':'tag-pub','Commercial':'tag-pub',
+        'Exercice de style':'tag-exercice','Style exercise':'tag-exercice'
+      };
+      if (map[tc]) tag.textContent = t[map[tc]];
+    });
+    // synopsis
+    var syn = card.querySelector('.pcard-synopsis');
+    if (syn) syn.textContent = pt.synopsis;
+  });
+
+  // Project page (if open)
+  var curId = document.querySelector('#proj-title') && document.querySelector('#proj-title').dataset.projId;
+  if (curId && PROJECT_TRANSLATIONS[curId]) {
+    var pt = PROJECT_TRANSLATIONS[curId][LANG];
+    document.getElementById('proj-eyebrow').textContent = pt.eyebrow;
+    document.getElementById('proj-subtitle').textContent = pt.subtitle;
+    document.getElementById('proj-synopsis').textContent = pt.synopsis;
+  }
+  document.querySelector('.proj-next-btn').childNodes[0].textContent = t['proj-all'] + ' ';
+}
+
+// Store project id on title when opening
+var _origOpenProject = openProject;
+openProject = function(id) {
+  _origOpenProject(id);
+  var titleEl = document.getElementById('proj-title');
+  if (titleEl) titleEl.dataset.projId = id;
+  if (LANG === 'en' && PROJECT_TRANSLATIONS[id]) {
+    var pt = PROJECT_TRANSLATIONS[id]['en'];
+    document.getElementById('proj-eyebrow').textContent = pt.eyebrow;
+    document.getElementById('proj-subtitle').textContent = pt.subtitle;
+    document.getElementById('proj-synopsis').textContent = pt.synopsis;
+  }
+};
 
 </script>
 
