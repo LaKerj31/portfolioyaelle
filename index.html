@@ -497,6 +497,20 @@
   }
   .proj-back-center svg { width: 16px; height: 16px; }
   .proj-back-center:hover { border-color: rgba(244,241,236,0.4); color: var(--cream); }
+  /* Logos des marques (caméras, lumières, objectifs) */
+  .sw-icon img { width: 40px; height: 40px; object-fit: contain; display: block; }
+  .brand-grid { display: flex; flex-wrap: wrap; gap: 0.9rem 1rem; margin-top: 0.4rem; }
+  .brand-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .brand-logo {
+    width: 120px; height: 56px; padding: 0 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: #FFFFFF; border: 1px solid var(--border); border-radius: 6px;
+    transition: border-color 0.2s;
+  }
+  .brand-item:hover .brand-logo { border-color: rgba(91,141,184,0.5); }
+  .brand-logo img { display: block; width: auto; max-width: 100%; }
+  .brand-logo-text { font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dark); }
+  .brand-models { font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: center; max-width: 120px; }
 </style>
 </head>
 <body>
@@ -722,13 +736,11 @@
             <span>Illustrator</span>
           </div>
           <div class="sw-item">
-            <div class="sw-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="6" fill="#1C1C1C"/><polygon points="15,12 15,28 28,20" fill="#FFFFFF"/><rect x="12" y="29" width="16" height="2" rx="1" fill="#555"/></svg></div>
+            <div class="sw-icon"><img src="logos/final-cut-pro.png" alt="Final Cut Pro"></div>
             <span>Final Cut Pro</span>
           </div>
           <div class="sw-item">
-            <div class="sw-icon" style="width:40px;height:40px;border-radius:6px;overflow:hidden;background:#1C1C1C;display:flex;align-items:center;justify-content:center;padding:4px;">
-              <svg fill="#FF6B35" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>DaVinci Resolve</title><path d="M17.621 0 5.977.004c-1.37 0-2.756.345-3.762 1.11a4.925 4.925 0 0 0-1.61 2.003C.233 3.93 0 5.02 0 5.951l.012 12.2c.002 1.604.479 3.057 1.461 4.112.984 1.056 2.462 1.683 4.331 1.691L16.856 24c1.26.005 3.095-.036 4.303-.714 1.075-.605 2.025-1.556 2.497-2.984.278-.84.345-2.084.344-3.147l-.021-11.13c-.002-.888-.15-2.023-.547-2.934-.425-.976-1.181-1.815-2.322-2.425C20.353.26 19.123 0 17.622 0zm0 .93c1.378 0 2.538.295 3.04.565.977.523 1.544 1.166 1.889 1.96.315.721.47 1.793.473 2.572l.018 11.13c.002 1.013-.097 2.257-.298 2.86-.396 1.202-1.146 1.946-2.063 2.462-.814.457-2.612.593-3.82.588l-11.05-.044c-1.657-.007-2.832-.534-3.626-1.386-.792-.851-1.212-2.06-1.212-3.485L.999 5.95c0-.829.196-1.827.474-2.437.345-.757.75-1.207 1.365-1.674C3.585 1.27 4.868.97 6.08.97zm-5.66 3.423c-1.976.089-3.204 1.658-3.214 3.29.019 1.443 1.635 3.481 2.884 4.53.12.099.154.109.33.18.062.025.198-.047.327-.135.36-.245.993-.947 1.648-1.738a7.67 7.67 0 0 0 1.031-1.683c.409-.89.261-1.599.235-1.888a3.983 3.983 0 0 0-.99-1.692 3.36 3.36 0 0 0-2.251-.864zm4.172 7.922a10.185 10.185 0 0 0-3.244.61c-.15.058-.26.1-.374.17-.057.036-.11.135-.105.292.017.433.29 1.278.624 2.27.384 1.135 1.066 2.27 1.844 2.74a3.23 3.23 0 0 0 2.53.342c.832-.243 1.595-.868 1.962-1.546.986-1.818.19-3.548-1.121-4.417-.447-.296-1.133-.445-1.89-.46-.074 0-.15-.002-.226-.001zm-8.432.038a6.201 6.201 0 0 0-.752.047c-.596.078-.932.273-1.29.51a3.177 3.177 0 0 0-1.365 1.979c-.075.552-.086 1.053.033 1.507.433 1.389 1.326 2.222 2.847 2.452.636.028 1.37-.063 1.99-.45 1.269-.782 2.08-3.17 2.412-4.742.053-.176.035-.357-.013-.42-.005-.067-.044-.113-.19-.183-.398-.192-1.32-.417-2.375-.6a7.68 7.68 0 0 0-1.297-.1z"/></svg>
-            </div>
+            <div class="sw-icon"><img src="logos/davinci-resolve.png" alt="DaVinci Resolve"></div>
             <span>DaVinci Resolve</span>
           </div>
         </div>
@@ -759,47 +771,14 @@
       <!-- CAMÉRAS -->
       <div class="about-col">
         <div class="detail-label">Caméras</div>
-        <div class="software-grid">
-          <div class="sw-item">
-            <div class="sw-icon" style="width:40px;height:40px;border-radius:6px;overflow:hidden;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px;">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><path d="M8.5505 9.8881c.921 0 1.6574.2303 2.2209.7423.3848.3485.5999.8454.5939 1.3665a1.9081 1.9081 0 0 1-.5939 1.3726c-.5272.4848-1.3483.7423-2.221.7423-.8725 0-1.6785-.2575-2.2148-.7423-.3908-.3485-.609-.8484-.603-1.3726 0-.518.2182-1.015.603-1.3665.5-.4545 1.3847-.7423 2.2149-.7423zm.003 3.6692c.4606 0 .8878-.1606 1.1878-.4575.2999-.2999.4332-.6605.4332-1.1029 0-.4242-.1484-.821-.4333-1.1029-.2938-.2908-.7332-.4545-1.1877-.4545s-.8938.1637-1.1907.4545c-.2848.2818-.4333.6787-.4333 1.103-.006.409.1485.806.4333 1.1029.2969.2939.7332.4575 1.1907.4575zm-4.8418-1.9665c.1605.0424.315.094.4666.1636a1.352 1.352 0 0 1 .3787.2576c.197.206.309.4817.306.7665a.9643.9643 0 0 1-.3787.7788 2.0662 2.0662 0 0 1-.709.3485 3.7231 3.7231 0 0 1-1.1938.1697c-.352 0-.5467-.0406-.8138-.0962l-.077-.016c-.294-.0666-.5817-.1575-.8575-.2787a.0695.0695 0 0 0-.0424-.0121c-.0454 0-.0818.0394-.0818.0848v.203H.1212v-1.4786h.5242a.7559.7559 0 0 0 .1363.418c.2121.2607.4394.3607.6575.4395.3666.1212.7514.1848 1.1362.1969.5526 0 .8756-.134.9455-.163l.009-.0037.0062-.0023c.0616-.0226.3119-.1143.3119-.3916 0-.2743-.2338-.334-.387-.373l-.022-.0058c-.1708-.046-.562-.0872-.9897-.1323l-.1526-.016c-.4848-.0515-.9696-.1273-1.1968-.1758-.4977-.1097-.6942-.2917-.816-.4045l-.0082-.0076A1.0192 1.0192 0 0 1 0 11.1608c0-.497.3394-.797.7575-.9817.4454-.2.9756-.288 1.4392-.288.8211.0031 1.4877.2697 1.727.394.097.0515.1455-.0121.1455-.0606v-.1484h.5272v1.2876h-.4727a.9056.9056 0 0 0-.2939-.4909 1.289 1.289 0 0 0-.297-.1787c-.3968-.1667-.821-.2515-1.2513-.2455-.4423 0-.8665.085-1.0786.2153-.1333.0818-.2.1848-.2.306 0 .1727.1454.2424.2182.2636.1967.0597.6328.103.972.1369.0736.0073.1426.0142.2036.0206.3272.0334 1.012.1243 1.315.2zm18.1673-.9966v-.4787H24v.4696h-.4757c-.1727 0-.2424.0334-.3727.1788l-1.4271 1.63a.098.098 0 0 0-.0182.0698v.7423a1.106 1.106 0 0 0 .0121.103.1496.1496 0 0 0 .1.0909.9368.9368 0 0 0 .1303.009h.4848v.4698h-2.5724v-.4697h.4606a.9343.9343 0 0 0 .1302-.0091.1627.1627 0 0 0 .1031-.091.5626.5626 0 0 0 .009-.1v-.7422c0-.0242 0-.0242-.0333-.0636a606.7592 606.7592 0 0 0-1.4119-1.6028c-.0758-.0788-.2061-.2061-.406-.2061h-.4576v-.4696h2.5876v.4696h-.3121c-.0697 0-.1182.0697-.0576.1455 0 0 .8696 1.0392.8787 1.0513.0091.0122.0152.0122.0273.003.0121-.009.8938-1.0453.8999-1.0543a.0912.0912 0 0 0-.0182-.1273.1095.1095 0 0 0-.0606-.0182zm-6.284-.0031h.4848c.2212 0 .2606.0848.2636.2909l.0273 1.5664-2.5815-2.324H11.944v.4697h.412c.297 0 .3182.1636.3182.309v2.2138c.0004.1285.0009.295-.1818.295h-.506v.4667h2.1634v-.4697h-.5273c-.212 0-.2211-.097-.2242-.303v-1.8816l2.9724 2.6511h.7575l-.0394-2.9966c.003-.218.0182-.2908.2424-.2908h.4726v-.4697H15.595Z"/></svg>
-              <span style="font-size:6px;color:#AAA;font-family:Arial;letter-spacing:0.05em">A7 III</span>
-            </div>
-            <span>Sony A7 III</span>
+        <div class="brand-grid">
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/sony.png" alt="Sony" style="height:16px"></div>
+            <span class="brand-models">A7 III · FX6 · FX9</span>
           </div>
-          <div class="sw-item">
-            <div class="sw-icon" style="width:40px;height:40px;border-radius:6px;overflow:hidden;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px;">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><path d="M8.5505 9.8881c.921 0 1.6574.2303 2.2209.7423.3848.3485.5999.8454.5939 1.3665a1.9081 1.9081 0 0 1-.5939 1.3726c-.5272.4848-1.3483.7423-2.221.7423-.8725 0-1.6785-.2575-2.2148-.7423-.3908-.3485-.609-.8484-.603-1.3726 0-.518.2182-1.015.603-1.3665.5-.4545 1.3847-.7423 2.2149-.7423zm.003 3.6692c.4606 0 .8878-.1606 1.1878-.4575.2999-.2999.4332-.6605.4332-1.1029 0-.4242-.1484-.821-.4333-1.1029-.2938-.2908-.7332-.4545-1.1877-.4545s-.8938.1637-1.1907.4545c-.2848.2818-.4333.6787-.4333 1.103-.006.409.1485.806.4333 1.1029.2969.2939.7332.4575 1.1907.4575zm-4.8418-1.9665c.1605.0424.315.094.4666.1636a1.352 1.352 0 0 1 .3787.2576c.197.206.309.4817.306.7665a.9643.9643 0 0 1-.3787.7788 2.0662 2.0662 0 0 1-.709.3485 3.7231 3.7231 0 0 1-1.1938.1697c-.352 0-.5467-.0406-.8138-.0962l-.077-.016c-.294-.0666-.5817-.1575-.8575-.2787a.0695.0695 0 0 0-.0424-.0121c-.0454 0-.0818.0394-.0818.0848v.203H.1212v-1.4786h.5242a.7559.7559 0 0 0 .1363.418c.2121.2607.4394.3607.6575.4395.3666.1212.7514.1848 1.1362.1969.5526 0 .8756-.134.9455-.163l.009-.0037.0062-.0023c.0616-.0226.3119-.1143.3119-.3916 0-.2743-.2338-.334-.387-.373l-.022-.0058c-.1708-.046-.562-.0872-.9897-.1323l-.1526-.016c-.4848-.0515-.9696-.1273-1.1968-.1758-.4977-.1097-.6942-.2917-.816-.4045l-.0082-.0076A1.0192 1.0192 0 0 1 0 11.1608c0-.497.3394-.797.7575-.9817.4454-.2.9756-.288 1.4392-.288.8211.0031 1.4877.2697 1.727.394.097.0515.1455-.0121.1455-.0606v-.1484h.5272v1.2876h-.4727a.9056.9056 0 0 0-.2939-.4909 1.289 1.289 0 0 0-.297-.1787c-.3968-.1667-.821-.2515-1.2513-.2455-.4423 0-.8665.085-1.0786.2153-.1333.0818-.2.1848-.2.306 0 .1727.1454.2424.2182.2636.1967.0597.6328.103.972.1369.0736.0073.1426.0142.2036.0206.3272.0334 1.012.1243 1.315.2zm18.1673-.9966v-.4787H24v.4696h-.4757c-.1727 0-.2424.0334-.3727.1788l-1.4271 1.63a.098.098 0 0 0-.0182.0698v.7423a1.106 1.106 0 0 0 .0121.103.1496.1496 0 0 0 .1.0909.9368.9368 0 0 0 .1303.009h.4848v.4698h-2.5724v-.4697h.4606a.9343.9343 0 0 0 .1302-.0091.1627.1627 0 0 0 .1031-.091.5626.5626 0 0 0 .009-.1v-.7422c0-.0242 0-.0242-.0333-.0636a606.7592 606.7592 0 0 0-1.4119-1.6028c-.0758-.0788-.2061-.2061-.406-.2061h-.4576v-.4696h2.5876v.4696h-.3121c-.0697 0-.1182.0697-.0576.1455 0 0 .8696 1.0392.8787 1.0513.0091.0122.0152.0122.0273.003.0121-.009.8938-1.0453.8999-1.0543a.0912.0912 0 0 0-.0182-.1273.1095.1095 0 0 0-.0606-.0182zm-6.284-.0031h.4848c.2212 0 .2606.0848.2636.2909l.0273 1.5664-2.5815-2.324H11.944v.4697h.412c.297 0 .3182.1636.3182.309v2.2138c.0004.1285.0009.295-.1818.295h-.506v.4667h2.1634v-.4697h-.5273c-.212 0-.2211-.097-.2242-.303v-1.8816l2.9724 2.6511h.7575l-.0394-2.9966c.003-.218.0182-.2908.2424-.2908h.4726v-.4697H15.595Z"/></svg>
-              <span style="font-size:6px;color:#AAA;font-family:Arial;letter-spacing:0.05em">FX6</span>
-            </div>
-            <span>Sony FX6</span>
-          </div>
-          <div class="sw-item">
-            <div class="sw-icon" style="width:40px;height:40px;border-radius:6px;overflow:hidden;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px;">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><path d="M8.5505 9.8881c.921 0 1.6574.2303 2.2209.7423.3848.3485.5999.8454.5939 1.3665a1.9081 1.9081 0 0 1-.5939 1.3726c-.5272.4848-1.3483.7423-2.221.7423-.8725 0-1.6785-.2575-2.2148-.7423-.3908-.3485-.609-.8484-.603-1.3726 0-.518.2182-1.015.603-1.3665.5-.4545 1.3847-.7423 2.2149-.7423zm.003 3.6692c.4606 0 .8878-.1606 1.1878-.4575.2999-.2999.4332-.6605.4332-1.1029 0-.4242-.1484-.821-.4333-1.1029-.2938-.2908-.7332-.4545-1.1877-.4545s-.8938.1637-1.1907.4545c-.2848.2818-.4333.6787-.4333 1.103-.006.409.1485.806.4333 1.1029.2969.2939.7332.4575 1.1907.4575zm-4.8418-1.9665c.1605.0424.315.094.4666.1636a1.352 1.352 0 0 1 .3787.2576c.197.206.309.4817.306.7665a.9643.9643 0 0 1-.3787.7788 2.0662 2.0662 0 0 1-.709.3485 3.7231 3.7231 0 0 1-1.1938.1697c-.352 0-.5467-.0406-.8138-.0962l-.077-.016c-.294-.0666-.5817-.1575-.8575-.2787a.0695.0695 0 0 0-.0424-.0121c-.0454 0-.0818.0394-.0818.0848v.203H.1212v-1.4786h.5242a.7559.7559 0 0 0 .1363.418c.2121.2607.4394.3607.6575.4395.3666.1212.7514.1848 1.1362.1969.5526 0 .8756-.134.9455-.163l.009-.0037.0062-.0023c.0616-.0226.3119-.1143.3119-.3916 0-.2743-.2338-.334-.387-.373l-.022-.0058c-.1708-.046-.562-.0872-.9897-.1323l-.1526-.016c-.4848-.0515-.9696-.1273-1.1968-.1758-.4977-.1097-.6942-.2917-.816-.4045l-.0082-.0076A1.0192 1.0192 0 0 1 0 11.1608c0-.497.3394-.797.7575-.9817.4454-.2.9756-.288 1.4392-.288.8211.0031 1.4877.2697 1.727.394.097.0515.1455-.0121.1455-.0606v-.1484h.5272v1.2876h-.4727a.9056.9056 0 0 0-.2939-.4909 1.289 1.289 0 0 0-.297-.1787c-.3968-.1667-.821-.2515-1.2513-.2455-.4423 0-.8665.085-1.0786.2153-.1333.0818-.2.1848-.2.306 0 .1727.1454.2424.2182.2636.1967.0597.6328.103.972.1369.0736.0073.1426.0142.2036.0206.3272.0334 1.012.1243 1.315.2zm18.1673-.9966v-.4787H24v.4696h-.4757c-.1727 0-.2424.0334-.3727.1788l-1.4271 1.63a.098.098 0 0 0-.0182.0698v.7423a1.106 1.106 0 0 0 .0121.103.1496.1496 0 0 0 .1.0909.9368.9368 0 0 0 .1303.009h.4848v.4698h-2.5724v-.4697h.4606a.9343.9343 0 0 0 .1302-.0091.1627.1627 0 0 0 .1031-.091.5626.5626 0 0 0 .009-.1v-.7422c0-.0242 0-.0242-.0333-.0636a606.7592 606.7592 0 0 0-1.4119-1.6028c-.0758-.0788-.2061-.2061-.406-.2061h-.4576v-.4696h2.5876v.4696h-.3121c-.0697 0-.1182.0697-.0576.1455 0 0 .8696 1.0392.8787 1.0513.0091.0122.0152.0122.0273.003.0121-.009.8938-1.0453.8999-1.0543a.0912.0912 0 0 0-.0182-.1273.1095.1095 0 0 0-.0606-.0182zm-6.284-.0031h.4848c.2212 0 .2606.0848.2636.2909l.0273 1.5664-2.5815-2.324H11.944v.4697h.412c.297 0 .3182.1636.3182.309v2.2138c.0004.1285.0009.295-.1818.295h-.506v.4667h2.1634v-.4697h-.5273c-.212 0-.2211-.097-.2242-.303v-1.8816l2.9724 2.6511h.7575l-.0394-2.9966c.003-.218.0182-.2908.2424-.2908h.4726v-.4697H15.595Z"/></svg>
-              <span style="font-size:6px;color:#AAA;font-family:Arial;letter-spacing:0.05em">FX9</span>
-            </div>
-            <span>Sony FX9</span>
-          </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#1A1A1A"/>
-                <text x="50%" y="42%" dominant-baseline="middle" text-anchor="middle" fill="#E8E0D0" font-family="Arial,sans-serif" font-weight="700" font-size="9">ARRI</text>
-                <text x="50%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="#999" font-family="Arial,sans-serif" font-weight="400" font-size="6">Mini LF</text>
-              </svg>
-            </div>
-            <span>ARRI Mini LF</span>
-          </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#1A1A1A"/>
-                <text x="50%" y="42%" dominant-baseline="middle" text-anchor="middle" fill="#E8E0D0" font-family="Arial,sans-serif" font-weight="700" font-size="9">ARRI</text>
-                <text x="50%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="#999" font-family="Arial,sans-serif" font-weight="400" font-size="6">Alexa 35</text>
-              </svg>
-            </div>
-            <span>ARRI Alexa 35</span>
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/arri.png" alt="ARRI" style="height:23px"></div>
+            <span class="brand-models">Mini LF · Alexa 35</span>
           </div>
         </div>
       </div>
@@ -807,58 +786,18 @@
       <!-- LUMIÈRES -->
       <div class="about-col">
         <div class="detail-label">Lumières</div>
-        <div class="software-grid">
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#0A0A0A"/>
-                <circle cx="20" cy="16" r="7" fill="none" stroke="#F5C842" stroke-width="1.5"/>
-                <line x1="20" y1="9" x2="20" y2="6" stroke="#F5C842" stroke-width="1.2"/>
-                <line x1="20" y1="27" x2="20" y2="30" stroke="#F5C842" stroke-width="1.2"/>
-                <line x1="13" y1="16" x2="10" y2="16" stroke="#F5C842" stroke-width="1.2"/>
-                <line x1="27" y1="16" x2="30" y2="16" stroke="#F5C842" stroke-width="1.2"/>
-                <line x1="15" y1="11" x2="13" y2="9" stroke="#F5C842" stroke-width="1.2"/>
-                <line x1="25" y1="11" x2="27" y2="9" stroke="#F5C842" stroke-width="1.2"/>
-                <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" fill="#F5C842" font-family="Arial,sans-serif" font-weight="700" font-size="6.5">NANLUX</text>
-              </svg>
-            </div>
-            <span>Nanlux</span>
+        <div class="brand-grid">
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/nanlux.png" alt="Nanlux" style="height:12px"></div>
           </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#0A0A0A"/>
-                <circle cx="20" cy="16" r="7" fill="none" stroke="#7FC8E8" stroke-width="1.5"/>
-                <line x1="20" y1="9" x2="20" y2="6" stroke="#7FC8E8" stroke-width="1.2"/>
-                <line x1="20" y1="27" x2="20" y2="30" stroke="#7FC8E8" stroke-width="1.2"/>
-                <line x1="13" y1="16" x2="10" y2="16" stroke="#7FC8E8" stroke-width="1.2"/>
-                <line x1="27" y1="16" x2="30" y2="16" stroke="#7FC8E8" stroke-width="1.2"/>
-                <line x1="15" y1="11" x2="13" y2="9" stroke="#7FC8E8" stroke-width="1.2"/>
-                <line x1="25" y1="11" x2="27" y2="9" stroke="#7FC8E8" stroke-width="1.2"/>
-                <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" fill="#7FC8E8" font-family="Arial,sans-serif" font-weight="700" font-size="5.5">NANLIGHT</text>
-              </svg>
-            </div>
-            <span>Nanlight</span>
+          <div class="brand-item">
+            <div class="brand-logo"><span class="brand-logo-text">Nanlight</span></div>
           </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#1A1A1A"/>
-                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#E8E0D0" font-family="Arial,sans-serif" font-weight="700" font-size="9">ARRI</text>
-              </svg>
-            </div>
-            <span>ARRI</span>
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/arri.png" alt="ARRI" style="height:23px"></div>
           </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#0A1628"/>
-                <circle cx="20" cy="17" r="8" fill="none" stroke="#2E7AFF" stroke-width="1.5"/>
-                <circle cx="20" cy="17" r="3.5" fill="#2E7AFF" opacity="0.6"/>
-                <text x="50%" y="88%" dominant-baseline="middle" text-anchor="middle" fill="#2E7AFF" font-family="Arial,sans-serif" font-weight="700" font-size="5.5">APUTURE</text>
-              </svg>
-            </div>
-            <span>Aputure</span>
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/aputure.png" alt="Aputure" style="height:21px"></div>
           </div>
         </div>
       </div>
@@ -866,50 +805,19 @@
       <!-- OBJECTIFS -->
       <div class="about-col">
         <div class="detail-label">Objectifs</div>
-        <div class="software-grid">
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#1A1A2E"/>
-                <circle cx="20" cy="20" r="10" fill="none" stroke="#C8A46E" stroke-width="1.5"/>
-                <circle cx="20" cy="20" r="5" fill="none" stroke="#C8A46E" stroke-width="1"/>
-                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#C8A46E" font-family="Arial,sans-serif" font-weight="700" font-size="5.5">ANGÉNIEUX</text>
-              </svg>
-            </div>
-            <span>Angénieux</span>
+        <div class="brand-grid">
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/angenieux.png" alt="Angénieux" style="height:22px"></div>
           </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#1A0000"/>
-                <circle cx="20" cy="20" r="10" fill="none" stroke="#CC0000" stroke-width="1.5"/>
-                <circle cx="20" cy="20" r="5" fill="none" stroke="#CC0000" stroke-width="1"/>
-                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#CC0000" font-family="Arial,sans-serif" font-weight="700" font-size="7">Canon</text>
-              </svg>
-            </div>
-            <span>Canon FD</span>
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/canon.png" alt="Canon" style="height:19px"></div>
+            <span class="brand-models">FD</span>
           </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#0D1A2E"/>
-                <circle cx="20" cy="20" r="10" fill="none" stroke="#4A90D9" stroke-width="1.5"/>
-                <circle cx="20" cy="20" r="5" fill="none" stroke="#4A90D9" stroke-width="1"/>
-                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#4A90D9" font-family="Arial,sans-serif" font-weight="700" font-size="6">SAMYANG</text>
-              </svg>
-            </div>
-            <span>Samyang</span>
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/samyang.png" alt="Samyang" style="height:25px"></div>
           </div>
-          <div class="sw-item">
-            <div class="sw-icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="6" fill="#0A0A0A"/>
-                <circle cx="20" cy="20" r="10" fill="none" stroke="#CCCCCC" stroke-width="1.5"/>
-                <circle cx="20" cy="20" r="5" fill="none" stroke="#CCCCCC" stroke-width="1"/>
-                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#CCCCCC" font-family="Arial,sans-serif" font-weight="700" font-size="7">ZEISS</text>
-              </svg>
-            </div>
-            <span>Zeiss</span>
+          <div class="brand-item">
+            <div class="brand-logo"><img src="logos/zeiss.png" alt="Zeiss" style="height:32px"></div>
           </div>
         </div>
       </div>
