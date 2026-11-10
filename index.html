@@ -512,6 +512,11 @@
   .brand-models { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); white-space: nowrap; }
   /* 4 logos (lumières, objectifs) : carré 2×2 */
   .brand-grid--square { display: grid; grid-template-columns: repeat(2, 120px); }
+  /* Caméras : une ligne par marque, le logo puis ses modèles */
+  .brand-grid--rows { flex-direction: column; align-items: flex-start; }
+  .brand-grid--rows .brand-item { flex-direction: row; gap: 1rem; }
+  .brand-grid--rows .brand-models { flex-direction: row; gap: 0; font-size: 0.68rem; }
+  .brand-grid--rows .brand-models li + li::before { content: "\00B7"; margin: 0 0.55em; color: var(--muted); font-weight: 400; }
   /* 6 logiciels : une ligne de 6 si la place le permet, sinon 2 lignes de 3 */
   .software-grid--apps { display: grid; grid-template-columns: repeat(3, max-content); }
   .about-col:has(.software-grid--apps) { container-type: inline-size; }
@@ -775,7 +780,7 @@
       <!-- CAMÉRAS -->
       <div class="about-col">
         <div class="detail-label">Caméras</div>
-        <div class="brand-grid">
+        <div class="brand-grid brand-grid--rows">
           <div class="brand-item">
             <div class="brand-logo"><img src="logos/sony.png" alt="Sony" style="height:16px"></div>
             <ul class="brand-models"><li>A7 III</li><li>FX3</li><li>FX6</li><li>FX9</li></ul>
