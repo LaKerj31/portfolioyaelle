@@ -308,6 +308,25 @@
   .lb__next { right: 0.6rem; top: 50%; transform: translateY(-50%); }
   .lb__count { position: absolute; left: 0; right: 0; bottom: 1.1rem; text-align: center; font-size: 0.68rem; letter-spacing: 0.22em; color: rgba(255,255,255,0.6); }
 
+  /* ══ ENTRÉE SUR LE SITE ══
+     Une fois par visite, en arrivant sur l'accueil : fond sombre, le nom s'écrit en blanc, puis le fond
+     se retire pour devenir le panneau de la photo pendant que le nom rétrécit et rejoint sa place.
+     Le nom est en « différence » : il passe tout seul du blanc au noir là où le fond devient blanc. */
+  .intro-bg, .intro-name { display: none; }
+  html.intro .intro-bg { display: block; position: fixed; inset: 0; z-index: 200; background: var(--charcoal); }
+  html.intro .intro-name { display: block; position: fixed; left: 0; top: 0; z-index: 201; width: max-content; margin: 0; color: #fff; mix-blend-mode: difference; visibility: hidden; pointer-events: none; will-change: transform; }
+  .intro-name > * { display: block; clip-path: inset(-0.4em 100% -0.4em -0.1em); }
+  html.intro .hero .hero__name { visibility: hidden; }
+  html.intro .nav, html.intro .hero__text > :not(.hero__name), html.intro .hero__portrait { opacity: 0; }
+  html.intro-end .nav { animation: intro-fade .8s ease both; }
+  html.intro-end .hero__text > .eyebrow { animation: intro-up .8s var(--ease) both; }
+  html.intro-end .hero__bio { animation: intro-up .8s var(--ease) .12s both; }
+  html.intro-end .hero__cta { animation: intro-up .8s var(--ease) .24s both; }
+  html.intro-end .hero__portrait { animation: intro-photo 1s var(--ease) .1s both; }
+  @keyframes intro-fade { from { opacity: 0; } }
+  @keyframes intro-up { from { opacity: 0; transform: translateY(16px); } }
+  @keyframes intro-photo { from { opacity: 0; transform: translateY(26px) scale(.97); } }
+
   /* ══ APPARITIONS ══ */
   .js .reveal { opacity: 0; transform: translateY(20px); transition: opacity .9s ease, transform .9s var(--ease); }
   .js .reveal.is-in { opacity: 1; transform: none; }
@@ -352,7 +371,25 @@
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add('js');</script>
+<script>
+(function () {
+  var d = document.documentElement; d.classList.add('js');
+  /* Animation d'entrée : une fois par visite, seulement en arrivant sur l'accueil
+     (et jamais si la personne a demandé à son appareil de réduire les animations). */
+  try {
+    var home = !location.hash || location.hash === '#' || location.hash === '#/';
+    var force = /[?&]intro=/.test(location.search), seen = false;
+    try { seen = !!sessionStorage.getItem('yg-intro'); } catch (e) {}
+    if (home && (force || !seen) && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      d.classList.add('intro');
+      window.__introKill = setTimeout(function () { d.classList.remove('intro'); }, 9000);   /* filet : jamais d'écran noir bloqué */
+      try { sessionStorage.setItem('yg-intro', '1'); } catch (e) {}
+    }
+  } catch (e) {}
+})();
+</script>
+<div class="intro-bg" id="intro-bg" aria-hidden="true"></div>
+<div class="intro-name hero__name" id="intro-name" aria-hidden="true"><span>Yaëlle</span><b>Gueguen</b></div>
 
 <!-- ══ BARRE DU HAUT ══ -->
 <header class="nav" id="nav">
@@ -1109,9 +1146,66 @@ function observe(instant) {
   if (center) $$('.card').forEach(function (el) { center.observe(el); });
 }
 
+/* ══ ENTRÉE SUR LE SITE ══ */
+function playIntro() {
+  const root = document.documentElement;
+  if (!root.classList.contains('intro')) return;
+  const bg = $('#intro-bg'), name = $('#intro-name'), h1 = $('.hero .hero__name'), visual = $('.hero__visual');
+  const K = /[?&]intro=slow/.test(location.search) ? 12 : 1;      /* ?intro=slow : au ralenti, pour régler */
+  const timers = []; let done = false;
+  const later = function (fn, ms) { timers.push(setTimeout(fn, ms * K)); };
+  const SKIP = ['pointerdown', 'keydown', 'wheel', 'touchmove', 'scroll'];
+  /* Fin : le vrai titre prend la place du nom animé, puis le reste de l'en-tête apparaît. */
+  const end = function () {
+    if (done) return; done = true;
+    timers.forEach(clearTimeout); clearTimeout(window.__introKill);
+    SKIP.forEach(function (ev) { window.removeEventListener(ev, end, true); });
+    root.classList.remove('intro'); root.classList.add('intro-end');
+    bg.remove(); name.remove();
+    setTimeout(function () { root.classList.remove('intro-end'); }, 1700);
+    onScroll();
+  };
+  clearTimeout(window.__introKill); window.__introKill = setTimeout(end, 9000 * K);
+  SKIP.forEach(function (ev) { window.addEventListener(ev, end, { capture: true, passive: true }); });   /* un geste passe l'animation */
+
+  const start = function () {
+    if (done) return;
+    const vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    const r = h1.getBoundingClientRect();
+    name.style.left = r.left + 'px'; name.style.top = r.top + 'px';
+    const n = name.getBoundingClientRect();                        /* boîte collée au texte */
+    const scale = Math.max(1, Math.min(1.35, vw * 0.88 / n.width, vh * 0.62 / n.height));
+    const from = 'translate(' + (vw / 2 - (n.left + n.width / 2)) + 'px, ' + (vh * 0.48 - (n.top + n.height / 2)) + 'px) scale(' + scale + ')';
+    name.style.transform = from; name.style.visibility = 'visible';
+    /* 1. Le nom s'écrit, ligne après ligne. */
+    const write = [{ clipPath: 'inset(-0.4em 100% -0.4em -0.1em)' }, { clipPath: 'inset(-0.4em -0.1em -0.4em -0.1em)' }];
+    const ease = 'cubic-bezier(.65,0,.2,1)';
+    name.children[0].animate(write, { duration: 700 * K, delay: 150 * K, easing: ease, fill: 'both' });
+    name.children[1].animate(write, { duration: 850 * K, delay: 520 * K, easing: ease, fill: 'both' });
+    /* 2. Après une courte pause, le fond se retire vers le panneau de la photo et le nom rejoint sa place. */
+    later(function () {
+      const v = visual.getBoundingClientRect();
+      const clip = 'inset(' + Math.max(0, v.top) + 'px ' + Math.max(0, vw - v.right) + 'px ' + Math.max(0, vh - v.bottom) + 'px ' + Math.max(0, v.left) + 'px)';
+      const move = { duration: 1150 * K, easing: 'cubic-bezier(.76,0,.18,1)', fill: 'forwards' };
+      bg.animate([{ clipPath: 'inset(0px 0px 0px 0px)' }, { clipPath: clip }], move);
+      name.animate([{ transform: from }, { transform: 'translate(0px, 0px) scale(1)' }], move);
+      later(end, 1180);
+    }, 150 + 520 + 850 + 420);
+  };
+  /* On attend la police (sinon le nom s'écrirait dans une autre) et que l'onglet soit affiché. */
+  const go = function () {
+    const fonts = document.fonts && document.fonts.load
+      ? Promise.all([document.fonts.load('400 1em "norman-variable"'), document.fonts.load('700 1em "norman-variable"')]).catch(function () {})
+      : Promise.resolve();
+    Promise.race([fonts, new Promise(function (ok) { setTimeout(ok, 1800); })]).then(function () { setTimeout(start, 30); });
+  };
+  if (document.hidden) document.addEventListener('visibilitychange', function seen() { if (!document.hidden) { document.removeEventListener('visibilitychange', seen); go(); } });
+  else go();
+}
+
 /* ══ DÉMARRAGE ══ */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-renderStatic(); renderHome(); route();
+renderStatic(); renderHome(); route(); playIntro();
 })();
 </script>
 </body>
